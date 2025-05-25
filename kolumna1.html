@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolumna 1 | Pawilon XYZ</title>
+    <style>
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray: #EEEEEE;
+            --dark-gray: #888888;
+            --text: #1A1A1A;
+            --transition: 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+            --scale-factor: 1.2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: calc(16px * var(--scale-factor));
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background-color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        p {
+            line-height: 1.6;
+            color: var(--dark-gray);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: calc(1400px * var(--scale-factor));
+            margin: 0 auto;
+            padding: 0 8vw; /* Nowe marginesy - 8% szerokości viewportu */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 5vw;
+            }
+        }
+
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: calc(1.5rem * var(--scale-factor)) calc(2rem * var(--scale-factor));
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            mix-blend-mode: difference;
+            color: var(--white);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .logo {
+            font-size: calc(1.125rem * var(--scale-factor));
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: calc(24px * var(--scale-factor));
+            height: calc(18px * var(--scale-factor));
+            cursor: pointer;
+            z-index: 1001;
+            position: relative;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: currentColor;
+            transition: all var(--transition);
+            transform-origin: center;
+            position: absolute;
+            left: 0;
+        }
+
+        .menu-toggle span:nth-child(1) {
+            top: 0;
+        }
+
+        .menu-toggle span:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .menu-toggle span:nth-child(3) {
+            bottom: 0;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(calc(8px * var(--scale-factor))) rotate(45deg);
+            top: 50%;
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateY(-50%) scaleX(0);
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(calc(-8px * var(--scale-factor))) rotate(-45deg);
+            bottom: 50%;
+        }
+
+        .nav-links {
+            display: none !important;
+            gap: calc(2.5rem * var(--scale-factor));
+        }
+
+        /* Menu mobilne - identyczne jak na landing page */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-links {
+            display: flex;
+            flex-direction: column;
+            gap: calc(2rem * var(--scale-factor));
+            text-align: center;
+        }
+
+        .mobile-link {
+            font-size: calc(2rem * var(--scale-factor));
+            color: var(--black);
+            transition: color var(--transition);
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+        }
+
+        .mobile-link:hover {
+            color: var(--dark-gray);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 0;
+            right: calc(2.5rem);
+            font-size: calc(3rem);
+            cursor: pointer;
+            display: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .mobile-menu.active .close-btn {
+            display: block;
+        }
+
+        .blur-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.05);
+            z-index: 998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .blur-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Główny układ strony kolumny */
+        .column-page {
+            padding-top: calc(80px * var(--scale-factor));
+        }
+
+        /* Sekcja z modelem */
+        .model-section {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 90vh;
+            padding: 4rem 0;
+        }
+
+        .model-container {
+            width: 100%;
+            height: 80vh;
+            min-height: 600px;
+            position: relative;
+        }
+
+        model-viewer {
+            --poster-color: transparent;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+        }
+
+        /* Tekst obok modelu */
+        .column-info {
+            padding: 1rem; /* Zmienione z 2rem */
+        }
+
+        .column-meta {
+            font-size: calc(0.9rem * var(--scale-factor));
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .column-title {
+            font-size: calc(2rem * var(--scale-factor)); /* Zmienione z 2.5rem */
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .column-description {
+            font-size: calc(1.1rem * var(--scale-factor));
+            line-height: 1.8;
+            color: var(--dark-gray);
+            margin-bottom: 2rem;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem; /* Zmienione z 1.5rem */
+            margin-top: 1rem; /* Zmienione z 2rem */
+        }
+
+        .spec-item h4 {
+            font-size: calc(0.8rem * var(--scale-factor));
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .spec-item p {
+            font-size: calc(1rem * var(--scale-factor));
+            line-height: 1.6;
+        }
+
+        /* Nowe modernistyczne sekcje */
+        .fullscreen-section {
+            min-height: 70vh; /* Zmienione z 100vh */
+            display: flex;
+            align-items: center;
+            padding: 2rem 0; /* Zmienione z 4rem */
+        }
+
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .image-full {
+            width: 100%;
+            height: 60vh; /* Zmienione z 80vh */
+            object-fit: cover;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .process-step {
+            border-left: 2px solid var(--black);
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .process-step-number {
+            position: absolute;
+            left: -0.8rem;
+            top: 0;
+            font-size: calc(1.5rem * var(--scale-factor));
+            background: var(--white);
+            padding: 0 0.5rem;
+        }
+
+        /* Galeria */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 6rem 0;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.8s var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Stopka */
+        .footer {
+            padding: calc(6rem * var(--scale-factor)) 0;
+            border-top: 1px solid var(--gray);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(calc(200px * var(--scale-factor)), 1fr));
+            gap: calc(3rem * var(--scale-factor));
+        }
+
+        .footer-title {
+            font-size: calc(0.875rem * var(--scale-factor));
+            margin-bottom: calc(1.5rem * var(--scale-factor));
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .footer p {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Responsywność */
+        @media (max-width: 1024px) {
+            .model-section, .split-section {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .model-container {
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 calc(1.5rem * var(--scale-factor));
+            }
+
+            .model-container {
+                height: 50vh;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item img {
+                height: 300px;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .column-title {
+                font-size: calc(2rem * var(--scale-factor));
+            }
+
+            .mobile-link {
+                font-size: calc(1.5rem * var(--scale-factor));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 calc(1.25rem * var(--scale-factor));
+            }
+
+            .column-title {
+                font-size: calc(1.8rem * var(--scale-factor));
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Nawigacja - identyczna jak na landing page -->
+<nav class="main-nav">
+    <div class="logo">Pawilon XYZ</div>
+
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>
+
+<!-- Menu mobilne - identyczne jak na landing page -->
+<div class="blur-overlay" id="blurOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+    <div class="close-btn" id="closeBtn">×</div>
+    <div class="mobile-links">
+        <a href="index.html" class="mobile-link" onclick="closeMenu()">Home</a>
+        <a href="index.html#columns" class="mobile-link" onclick="closeMenu()">Columns</a>
+        <a href="index.html#process" class="mobile-link" onclick="closeMenu()">Process</a>
+    </div>
+</div>
+
+<!-- Strona kolumny -->
+<main class="column-page">
+    <!-- Sekcja z modelem 3D -->
+    <section class="container">
+        <div class="model-section">
+            <div class="model-container">
+                <model-viewer
+                        src="models/kolumna1.gltf"
+                        alt="Kolumna 1 - Model 3D"
+                        camera-controls
+                        auto-rotate
+                        shadow-intensity="1"
+                        exposure="0.55"
+                        camera-orbit="90deg 55deg 3.5m"
+                        camera-target="-10m 15m -8.21m"
+                        field-of-view="45deg"
+                        bounds="tight"
+                        style="--poster-color: transparent;"
+                ></model-viewer>
+            </div>
+
+            <div class="column-info">
+                <div class="column-meta">Lorem ipsum Lorem ipsum</div>
+                <h1 class="column-title">Lorem ipsum</h1>
+                <p class="column-description">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                </p>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <h4>Lorem ipsum</h4>
+                        <p>Lorem ipsum</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Lorem ipsum</h4>
+                        <p>Lorem ipsum</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Lorem ipsum</h4>
+                        <p>Lorem ipsum</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Lorem ipsum</h4>
+                        <p>Lorem ipsum</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pełnoekranowy obraz -->
+    <section class="fullscreen-section">
+        <div class="container">
+        <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Proces produkcji" class="image-full">
+        </div>
+    </section>
+
+    <!-- Sekcja procesu -->
+    <section class="fullscreen-section">
+        <div class="container">
+            <div class="split-section">
+            <div>
+                <h2 class="column-title">Proces twórczy</h2>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="process-step-number">1</div>
+                        <h3>Lorem ipsum</h3>
+                        <p class="column-description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-step-number">2</div>
+                        <h3>Lorem ipsum</h3>
+                        <p class="column-description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-step-number">3</div>
+                        <h3>Lorem ipsum</h3>
+                        <p class="column-description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Proces produkcji" class="image-full">
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Galeria -->
+    <section class="container">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Detal 1">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Detal 2">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Detal 3">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja materiałowa -->
+    <section class="fullscreen-section">
+        <div class="container">
+            <div class="split-section">
+            <div>
+                <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Materiał" class="image-full">
+            </div>
+            <div>
+                <h2 class="column-title">Lorem ipsum</h2>
+                <p class="column-description">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                </p>
+                <div class="specs-grid" style="margin-top: 2rem;">
+                    <div class="spec-item">
+                        <h4>Lorem ipsum</h4>
+                        <p>Lorem ipsum</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Lorem ipsum</h4>
+                        <p>Lorem ipsum, Lorem ipsum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+</main>
+
+<!-- Stopka - identyczna jak na landing page -->
+<!-- Stopka -->
+<footer id="contact" class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <h3 class="footer-title">Pawilon XYZ</h3>
+                <p>lorem ipsum</p>
+            </div>
+
+            <div>
+                <h3 class="footer-title">Kontakt</h3>
+                <p>xyz@gmail.com</p>
+            </div>
+
+            <div>
+                <h3 class="footer-title">Autorzy</h3>
+                <p>Projekt: </p>
+                <p>Prowadzący: </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Menu mobilne - identyczne jak na landing page
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeBtn = document.getElementById('closeBtn');
+    const blurOverlay = document.getElementById('blurOverlay');
+    const body = document.body;
+
+    menuToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        blurOverlay.classList.toggle('active');
+        body.classList.toggle('no-scroll');
+
+        // Animacja hamburgera w X
+        const spans = this.querySelectorAll('span');
+        if (this.classList.contains('active')) {
+            spans[0].style.transform = 'translateY(8px) rotate(45deg)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+        } else {
+            spans[0].style.transform = '';
+            spans[1].style.opacity = '';
+            spans[2].style.transform = '';
+        }
+    });
+
+    closeBtn.addEventListener('click', closeMenu);
+
+    function closeMenu() {
+        menuToggle.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        blurOverlay.classList.remove('active');
+        body.classList.remove('no-scroll');
+
+        const spans = menuToggle.querySelectorAll('span');
+        spans[0].style.transform = '';
+        spans[1].style.opacity = '';
+        spans[2].style.transform = '';
+    }
+
+    // Efekt przewijania nawigacji - identyczny jak na landing page
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('.main-nav');
+        if (window.scrollY > 100) {
+            nav.style.mixBlendMode = 'normal';
+            nav.style.color = 'var(--black)';
+            nav.style.backgroundColor = 'rgba(255,255,255,0.9)';
+        } else {
+            nav.style.mixBlendMode = 'difference';
+            nav.style.color = 'var(--white)';
+            nav.style.backgroundColor = 'transparent';
+        }
+    });
+
+    // Inicjalizacja modelu
+    document.querySelector('model-viewer').addEventListener('load', function() {
+        this.cameraTarget = '-10m 15m -8.21m';
+        this.updateFraming();
+    });
+
+    // Płynne przewijanie do sekcji
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+
+                // Zamknij menu mobilne jeśli otwarte
+                if (mobileMenu.classList.contains('active')) {
+                    closeMenu();
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>
