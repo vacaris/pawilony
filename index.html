@@ -40,6 +40,7 @@
 
     body.no-scroll {
       overflow: hidden;
+      height: 100vh;
     }
 
     h1, h2, h3, h4 {
@@ -227,30 +228,34 @@
       width: 100%;
     }
 
-    /* Menu mobilne */
     .mobile-menu {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
+      width: 100%;
       height: 100vh;
-      background-color: rgba(255, 255, 255, 0.85); /* półprzezroczyste tło */
-      backdrop-filter: blur(10px); /* BLUR działa! */
-      -webkit-backdrop-filter: blur(10px); /* dla Safari */
-      z-index: 999;
-      display: flex;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.6s ease;
+      overflow-y: auto;
     }
 
     .mobile-menu.active {
-      opacity: 1;
-      pointer-events: all;
+      display: flex;
     }
+    @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
+      .mobile-menu {
+        background-color: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+    }
+
 
     .mobile-links {
       display: flex;
@@ -806,22 +811,20 @@
       background-color: var(--black);
     }
     .blur-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      position: absolute;
+      inset: 0;
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px); /* dla Safari */
-      background-color: rgba(255, 255, 255, 0.05); /* lekki biały film */
-      z-index: 998; /* poniżej menu, ale nad resztą */
+      background-color: rgba(255, 255, 255, 0.2);
+      z-index: 998;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease;
+      will-change: opacity;
     }
     .blur-overlay.active {
+      display: block;
       opacity: 1;
-      pointer-events: all;
+      pointer-events: auto;
     }
 
 
@@ -999,23 +1002,24 @@
     <span></span>
   </div>
 </nav>
+<div class="blur-overlay" id="blurOverlay"></div>
 
 <!-- Menu mobilne -->
-<div class="blur-overlay" id="blurOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
   <div class="close-btn" id="closeBtn">×</div>
   <div class="mobile-links">
-    <a href="#intro" class="mobile-link" onclick="closeMenu()">Wstęp</a>
-    <a href="#columns" class="mobile-link" onclick="closeMenu()">Kolumny</a>
-    <a href="#map" class="mobile-link" onclick="closeMenu()">Mapa</a>
-    <a href="#process" class="mobile-link" onclick="closeMenu()">Proces</a>
-    <a href="#contact" class="mobile-link" onclick="closeMenu()">Kontakt</a>
+    <a href="#intro" class="mobile-link">Wstęp</a>
+    <a href="#columns" class="mobile-link">Kolumny</a>
+    <a href="#map" class="mobile-link">Mapa</a>
+    <a href="#process" class="mobile-link">Proces</a>
+    <a href="#contact" class="mobile-link">Kontakt</a>
   </div>
   <div class="mobile-map-info">
     <div class="mobile-map-line1">Redefining Beton — Site Design</div>
     <div class="mobile-map-line2">Sześć kolumn. Jedna idea. Beton, który mówi.</div>
   </div>
 </div>
+
 
 <!-- Sekcja Wstęp -->
 <section id="intro" class="cover visible">
@@ -1178,6 +1182,8 @@
   </div>
 </section>
 
+
+
 <!-- Stopka -->
 <footer id="contact" class="footer">
   <div class="container">
@@ -1207,15 +1213,14 @@
   const mobileMenu = document.getElementById('mobileMenu');
   const closeBtn = document.getElementById('closeBtn');
   const body = document.body;
+  const blurOverlay = document.getElementById('blurOverlay');
 
-  menuToggle.addEventListener('click', function() {
-    this.classList.toggle('active');
+  function toggleMenu() {
+    const isActive = menuToggle.classList.toggle('active');
     mobileMenu.classList.toggle('active');
-    body.classList.toggle('no-scroll');
 
-    // Animacja hamburgera w X
-    const spans = this.querySelectorAll('span');
-    if (this.classList.contains('active')) {
+    const spans = menuToggle.querySelectorAll('span');
+    if (isActive) {
       spans[0].style.transform = 'translateY(8px) rotate(45deg)';
       spans[1].style.opacity = '0';
       spans[2].style.transform = 'translateY(-8px) rotate(-45deg)';
@@ -1224,20 +1229,26 @@
       spans[1].style.opacity = '';
       spans[2].style.transform = '';
     }
+  }
+
+
+  menuToggle.addEventListener('click', toggleMenu);
+
+  closeBtn.addEventListener('click', function() {
+    if (mobileMenu.classList.contains('active')) {
+      toggleMenu();
+    }
   });
 
-  closeBtn.addEventListener('click', closeMenu);
+  // Zamknij menu po kliknięciu w link
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', function() {
+      if (mobileMenu.classList.contains('active')) {
+        toggleMenu();
+      }
+    });
+  });
 
-  function closeMenu() {
-    menuToggle.classList.remove('active');
-    mobileMenu.classList.remove('active');
-    body.classList.remove('no-scroll');
-
-    const spans = menuToggle.querySelectorAll('span');
-    spans[0].style.transform = '';
-    spans[1].style.opacity = '';
-    spans[2].style.transform = '';
-  }
 
   // Efekt przewijania nawigacji
   window.addEventListener('scroll', () => {
@@ -1270,7 +1281,7 @@
 
         // Zamknij menu mobilne jeśli otwarte
         if (mobileMenu.classList.contains('active')) {
-          closeMenu();
+          toggleMenu(); // <--- używamy toggleMenu zamiast closeMenu
         }
       }
     });
@@ -1279,6 +1290,7 @@
   // Efekty hover na zdjęciach — delikatniejszy
   document.querySelectorAll('.column-item').forEach(item => {
     const img = item.querySelector('img');
+    if (!img) return;
 
     item.addEventListener('mousemove', (e) => {
       const bounds = item.getBoundingClientRect();
@@ -1292,6 +1304,8 @@
       img.style.transform = 'scale(1)';
     });
   });
+
+
 
   // Dynamiczny nagłówek
   const options = document.querySelectorAll('.top-options a');
@@ -1331,5 +1345,3 @@
 </script>
 </body>
 </html>
-
-

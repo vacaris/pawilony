@@ -36,8 +36,8 @@
             line-height: 1.6;
         }
 
-        body.no-scroll {
-            overflow: hidden;
+        body.menu-open {
+            overflow: visible;
         }
 
         h1, h2, h3, h4 {
@@ -91,14 +91,21 @@
             align-items: center;
             mix-blend-mode: difference;
             color: var(--white);
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
             font-weight: 500;
+            background-color: transparent;
         }
 
         .logo {
             font-size: calc(1.125rem * var(--scale-factor));
             font-weight: 500;
             letter-spacing: 0.02em;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: inherit;
         }
 
         .menu-toggle {
@@ -156,29 +163,32 @@
             gap: calc(2.5rem * var(--scale-factor));
         }
 
-        /* Menu mobilne - identyczne jak na landing page */
         .mobile-menu {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
+            width: 100%;
             height: 100vh;
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 999;
-            display: flex;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.6s ease;
+            overflow-y: auto;
         }
 
         .mobile-menu.active {
-            opacity: 1;
-            pointer-events: all;
+            display: flex;
+        }
+        @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
+            .mobile-menu {
+                background-color: rgba(255, 255, 255, 0.7);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+            }
         }
 
         .mobile-links {
@@ -223,7 +233,7 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             background-color: rgba(255, 255, 255, 0.05);
-            z-index: 998;
+            z-index: 1000;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
@@ -457,12 +467,14 @@
                 font-size: calc(1.8rem * var(--scale-factor));
             }
         }
+
+
     </style>
 </head>
 <body>
 <!-- Nawigacja - identyczna jak na landing page -->
 <nav class="main-nav">
-    <div class="logo">Pawilon XYZ</div>
+    <a href="index.html" class="logo" onclick="event.preventDefault(); window.location.href='index.html'; window.scrollTo({top: 0, behavior: 'smooth'});">Pawilon XYZ</a>
 
     <div class="menu-toggle" id="menuToggle">
         <span></span>
@@ -476,9 +488,9 @@
 <div class="mobile-menu" id="mobileMenu">
     <div class="close-btn" id="closeBtn">×</div>
     <div class="mobile-links">
-        <a href="index.html" class="mobile-link" onclick="closeMenu()">Home</a>
-        <a href="index.html#columns" class="mobile-link" onclick="closeMenu()">Columns</a>
-        <a href="index.html#process" class="mobile-link" onclick="closeMenu()">Process</a>
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="index.html#columns" class="mobile-link">Columns</a>
+        <a href="index.html#process" class="mobile-link">Process</a>
     </div>
 </div>
 
@@ -638,22 +650,20 @@
 </footer>
 
 <script>
-    // Menu mobilne - identyczne jak na landing page
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     const closeBtn = document.getElementById('closeBtn');
-    const blurOverlay = document.getElementById('blurOverlay');
     const body = document.body;
+    const blurOverlay = document.getElementById('blurOverlay');
 
-    menuToggle.addEventListener('click', function() {
-        this.classList.toggle('active');
+    function toggleMenu() {
+        const isActive = menuToggle.classList.toggle('active');
         mobileMenu.classList.toggle('active');
         blurOverlay.classList.toggle('active');
-        body.classList.toggle('no-scroll');
+        body.classList.toggle('menu-open'); // użyj tej klasy zamiast 'no-scroll'
 
-        // Animacja hamburgera w X
-        const spans = this.querySelectorAll('span');
-        if (this.classList.contains('active')) {
+        const spans = menuToggle.querySelectorAll('span');
+        if (isActive) {
             spans[0].style.transform = 'translateY(8px) rotate(45deg)';
             spans[1].style.opacity = '0';
             spans[2].style.transform = 'translateY(-8px) rotate(-45deg)';
@@ -662,23 +672,24 @@
             spans[1].style.opacity = '';
             spans[2].style.transform = '';
         }
-    });
-
-    closeBtn.addEventListener('click', closeMenu);
-
-    function closeMenu() {
-        menuToggle.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        blurOverlay.classList.remove('active');
-        body.classList.remove('no-scroll');
-
-        const spans = menuToggle.querySelectorAll('span');
-        spans[0].style.transform = '';
-        spans[1].style.opacity = '';
-        spans[2].style.transform = '';
     }
 
-    // Efekt przewijania nawigacji - identyczny jak na landing page
+    menuToggle.addEventListener('click', toggleMenu);
+    closeBtn.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('active')) {
+            toggleMenu();
+        }
+    });
+    blurOverlay.addEventListener('click', toggleMenu);
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    });
+
     window.addEventListener('scroll', () => {
         const nav = document.querySelector('.main-nav');
         if (window.scrollY > 100) {
@@ -692,17 +703,14 @@
         }
     });
 
-    // Inicjalizacja modelu
-    document.querySelector('model-viewer').addEventListener('load', function() {
+    document.querySelector('model-viewer')?.addEventListener('load', function() {
         this.cameraTarget = '-10m 15m -8.21m';
-        this.updateFraming();
+        this.updateFraming?.();
     });
 
-    // Płynne przewijanie do sekcji
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
 
@@ -713,13 +721,13 @@
                     behavior: 'smooth'
                 });
 
-                // Zamknij menu mobilne jeśli otwarte
                 if (mobileMenu.classList.contains('active')) {
-                    closeMenu();
+                    toggleMenu();
                 }
             }
         });
     });
 </script>
+
 </body>
 </html>
