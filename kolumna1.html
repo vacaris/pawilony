@@ -467,6 +467,22 @@
                 font-size: calc(1.8rem * var(--scale-factor));
             }
         }
+        model-viewer::part(default-ar-button) {
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+            border-radius: 2rem;
+            padding: 0.6rem 1.2rem;
+            font-weight: 500;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        model-viewer::part(default-ar-button):hover {
+            background-color: black;
+            color: white;
+        }
 
 
     </style>
@@ -502,6 +518,9 @@
             <div class="model-container">
                 <model-viewer
                         src="models/kolumna1.gltf"
+                        ios-src="models/kolumna1.usdz"
+                        ar
+                        ar-modes="scene-viewer quick-look webxr"
                         alt="Kolumna 1 - Model 3D"
                         camera-controls
                         auto-rotate
@@ -511,6 +530,7 @@
                         camera-target="-10m 15m -8.21m"
                         field-of-view="45deg"
                         bounds="tight"
+                        alt="Kolumna 1 - Model AR"
                         style="--poster-color: transparent;"
                 ></model-viewer>
             </div>
