@@ -4,7 +4,9 @@
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kolumna 1 | Pawilon XYZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+    <title>Kolumna 1 | W Formie</title>
     <style>
         :root {
             --black: #000000;
@@ -12,6 +14,7 @@
             --gray: #EEEEEE;
             --dark-gray: #888888;
             --text: #1A1A1A;
+            --magenta: #FF00FF;
             --transition: 0.4s cubic-bezier(0.65, 0, 0.35, 1);
             --scale-factor: 1.2;
         }
@@ -28,7 +31,7 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text);
             background-color: var(--white);
             -webkit-font-smoothing: antialiased;
@@ -41,10 +44,30 @@
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 400;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
             letter-spacing: -0.01em;
             line-height: 1.2;
+        }
+
+        .minecraft-font {
+            font-family: 'Minecraft', sans-serif;
+            font-weight: normal;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .lato-font {
+            font-style: italic;
+            color: var(--dark-gray);
+            opacity: 0.8;
+            letter-spacing: 0.03em;
+            font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+
+        }
+
+        .magenta-text {
+            color: var(--magenta);
         }
 
         p {
@@ -70,7 +93,7 @@
             width: 100%;
             max-width: calc(1400px * var(--scale-factor));
             margin: 0 auto;
-            padding: 0 8vw; /* Nowe marginesy - 8% szerokości viewportu */
+            padding: 0 8vw;
         }
 
         @media (max-width: 768px) {
@@ -89,23 +112,40 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            mix-blend-mode: difference;
-            color: var(--white);
+            color: var(--black);
             transition: all 0.5s ease;
             font-weight: 500;
-            background-color: transparent;
+            background-color: rgba(255, 255, 255, 0.9);
         }
 
         .logo {
-            font-size: calc(1.125rem * var(--scale-factor));
-            font-weight: 500;
+            font-size: calc(1.8rem * var(--scale-factor));
+            font-weight: 700;
             letter-spacing: 0.02em;
             color: inherit;
+            padding-left: 23px;
+            text-decoration: none;
+            font-family: 'Minecraft', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
         }
 
-        .logo:hover {
-            color: inherit;
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .logo-circle {
+            transform: scale(1.5);
         }
 
         .menu-toggle {
@@ -158,18 +198,13 @@
             bottom: 50%;
         }
 
-        .nav-links {
-            display: none !important;
-            gap: calc(2.5rem * var(--scale-factor));
-        }
-
         .mobile-menu {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 1000;
@@ -183,13 +218,6 @@
         .mobile-menu.active {
             display: flex;
         }
-        @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
-            .mobile-menu {
-                background-color: rgba(255, 255, 255, 0.7);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-            }
-        }
 
         .mobile-links {
             display: flex;
@@ -200,14 +228,14 @@
 
         .mobile-link {
             font-size: calc(2rem * var(--scale-factor));
-            color: var(--black);
+            color: var(--white);
             transition: color var(--transition);
-            font-family: 'Playfair Display', serif;
-            font-weight: 400;
+            font-family: 'Minecraft', sans-serif;
+            font-weight: 700;
         }
 
         .mobile-link:hover {
-            color: var(--dark-gray);
+            color: var(--magenta);
         }
 
         .close-btn {
@@ -217,7 +245,8 @@
             font-size: calc(3rem);
             cursor: pointer;
             display: none;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Lato', sans-serif;
+            color: var(--white);
         }
 
         .mobile-menu.active .close-btn {
@@ -232,8 +261,8 @@
             height: 100vh;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.05);
-            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
@@ -275,7 +304,7 @@
 
         /* Tekst obok modelu */
         .column-info {
-            padding: 1rem; /* Zmienione z 2rem */
+            padding: 1rem;
         }
 
         .column-meta {
@@ -284,11 +313,12 @@
             letter-spacing: 0.1em;
             margin-bottom: 1.5rem;
             color: var(--dark-gray);
+            font-family: 'Minecraft', sans-serif;
         }
 
         .column-title {
-            font-size: calc(2rem * var(--scale-factor)); /* Zmienione z 2.5rem */
-            font-weight: 400;
+            font-size: calc(2rem * var(--scale-factor));
+            font-weight: 900;
             line-height: 1.2;
             margin-bottom: 1.5rem;
         }
@@ -303,16 +333,17 @@
         .specs-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem; /* Zmienione z 1.5rem */
-            margin-top: 1rem; /* Zmienione z 2rem */
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
-        .spec-item h4 {
+        .spec-item h4:not(.lato-font) {
             font-size: calc(0.8rem * var(--scale-factor));
             text-transform: uppercase;
             letter-spacing: 0.1em;
             margin-bottom: 0.5rem;
             color: var(--dark-gray);
+            font-family: 'Minecraft', sans-serif;
         }
 
         .spec-item p {
@@ -322,10 +353,10 @@
 
         /* Nowe modernistyczne sekcje */
         .fullscreen-section {
-            min-height: 70vh; /* Zmienione z 100vh */
+            min-height: 70vh;
             display: flex;
             align-items: center;
-            padding: 2rem 0; /* Zmienione z 4rem */
+            padding: 2rem 0;
         }
 
         .split-section {
@@ -336,10 +367,19 @@
             min-height: 80vh;
         }
 
-        .image-full {
+        /* Nowe style dla kwadratowych obrazów */
+        .square-image-container {
             width: 100%;
-            height: 60vh; /* Zmienione z 80vh */
-            object-fit: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .square-image {
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 1/1;
+            object-fit: contain;
         }
 
         .process-steps {
@@ -361,24 +401,32 @@
             font-size: calc(1.5rem * var(--scale-factor));
             background: var(--white);
             padding: 0 0.5rem;
+            font-family: 'Minecraft', sans-serif;
+            color: var(--magenta);
         }
 
         /* Galeria */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 6rem 0;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 6rem auto;
+            max-width: 1200px;
         }
 
         .gallery-item {
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
 
         .gallery-item img {
             width: 100%;
-            height: 400px;
-            object-fit: cover;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
             transition: transform 0.8s var(--transition);
         }
 
@@ -386,10 +434,87 @@
             transform: scale(1.05);
         }
 
+        .gallery-caption {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: calc(0.9rem * var(--scale-factor));
+            color: var(--dark-gray);
+        }
+
+        /* Nowa sekcja z parametrami */
+        .parameters-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 80vh;
+            padding: 4rem 0;
+        }
+
+        .parameter-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .parameter-name {
+            font-size: calc(1.2rem * var(--scale-factor));
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .parameter-value {
+            font-size: calc(1rem * var(--scale-factor));
+            color: var(--dark-gray);
+        }
+
+        /* Sekcja procesu z trzema obrazami */
+        .process-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .process-image {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .process-image img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: contain;
+        }
+
+        .process-image-caption {
+            text-align: center;
+            font-size: calc(0.9rem * var(--scale-factor));
+            color: var(--dark-gray);
+        }
+
+        /* Nowy styl dla większego obrazka */
+        .large-image {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Sekcja z wariantem i obrazem obok */
+        .variant-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin: 6rem 0;
+        }
+
         /* Stopka */
         .footer {
             padding: calc(6rem * var(--scale-factor)) 0;
-            border-top: 1px solid var(--gray);
+            border-top: 1px solid var(--black);
+            background-color: white;
+            color: var(--black);
         }
 
         .footer-grid {
@@ -401,19 +526,21 @@
         .footer-title {
             font-size: calc(0.875rem * var(--scale-factor));
             margin-bottom: calc(1.5rem * var(--scale-factor));
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
             letter-spacing: 0.05em;
             text-transform: uppercase;
+            color: var(--black);
         }
 
         .footer p {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Lato', sans-serif;
+            color: var(--black);
         }
 
         /* Responsywność */
         @media (max-width: 1024px) {
-            .model-section, .split-section {
+            .model-section, .split-section, .parameters-section, .variant-section {
                 grid-template-columns: 1fr;
                 min-height: auto;
             }
@@ -423,7 +550,7 @@
                 min-height: 400px;
             }
 
-            .gallery-grid {
+            .gallery-grid, .process-gallery {
                 grid-template-columns: 1fr 1fr;
             }
         }
@@ -437,12 +564,12 @@
                 height: 50vh;
             }
 
-            .gallery-grid {
+            .gallery-grid, .process-gallery {
                 grid-template-columns: 1fr;
             }
 
             .gallery-item img {
-                height: 300px;
+                max-height: 300px;
             }
 
             .specs-grid {
@@ -468,14 +595,51 @@
             }
         }
 
+        /* Dodatkowe style dla elementów z indexu */
+        .highlight-underline {
+            position: relative;
+            display: inline-block;
+        }
 
+        .highlight-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: currentColor;
+            transition: background-color 0.3s ease;
+        }
 
+        .highlight-underline:hover {
+            color: var(--magenta);
+        }
+
+        .highlight-underline:hover::after {
+            background-color: var(--magenta);
+        }
+
+        .pawilony-title {
+            font-family: 'Minecraft', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .column-title.minecraft-font,
+        h1.column-title.minecraft-font,
+        h2.column-title.minecraft-font {
+            color: var(--magenta);
+        }
     </style>
 </head>
 <body>
-<!-- Nawigacja - identyczna jak na landing page -->
+<!-- Nawigacja -->
 <nav class="main-nav">
-    <a href="index.html" class="logo" onclick="event.preventDefault(); window.location.href='index.html'; window.scrollTo({top: 0, behavior: 'smooth'});">Pawilon XYZ</a>
+    <a href="index.html" class="logo-container">
+        <span class="logo">// W FORMIE</span>
+        <img src="images/main/logoai_czarne.png" alt="Logo" class="logo-circle">
+    </a>
 
     <div class="menu-toggle" id="menuToggle">
         <span></span>
@@ -484,14 +648,15 @@
     </div>
 </nav>
 
-<!-- Menu mobilne - identyczne jak na landing page -->
+<!-- Menu mobilne -->
 <div class="blur-overlay" id="blurOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
     <div class="close-btn" id="closeBtn">×</div>
     <div class="mobile-links">
-        <a href="index.html" class="mobile-link">Home</a>
-        <a href="index.html#columns" class="mobile-link">Columns</a>
-        <a href="index.html#process" class="mobile-link">Process</a>
+        <a href="index.html" class="mobile-link">Intro</a>
+        <a href="index.html#columns" class="mobile-link">Kolumny</a>
+        <a href="index.html#process" class="mobile-link">Proces</a>
+        <a href="autorzy.html" class="mobile-link">Autorzy</a>
     </div>
 </div>
 
@@ -502,102 +667,121 @@
         <div class="model-section">
             <div class="model-container">
                 <model-viewer
-                        src="models/kolumna3.glb"
-                        ios-src="models/kolumna3.usdz"
+                        src="models/kolumna-1.gltf"
+                        ios-src="models/kolumna-1.usdz"
+                        alt="Model kolumny betonowej"
                         ar
                         ar-modes="scene-viewer quick-look webxr"
-                        alt="Kolumna 1 - Model 3D"
-                        camera-controls
+                        environment-image="neutral"
                         auto-rotate
-                        shadow-intensity="1"
-                        exposure="0.9"
-                        camera-orbit="90deg 55deg 5.5m"
-                        camera-target="15 5m -15m"
-                        field-of-view="50deg"
-                        bounds="tight"
-                        alt="Kolumna 1 - Model AR"
-                        style="--poster-color: transparent;"
-                ></model-viewer>
+                        camera-controls
+                        field-of-view="25deg"
+                        style="width: 100%; height: 1600px;"
+                        exposure="0.6";>
+                </model-viewer>
             </div>
 
             <div class="column-info">
-                <div class="column-meta">Lorem ipsum Lorem ipsum</div>
-                <h1 class="column-title">Lorem ipsum</h1>
+                <div class="column-meta">KOLUMNA 01</div>
+                <h1 class="column-title minecraft-font">>> NAZWA W TRAKCIE</h1>
+                <div class="spec-item">
+                    <h4 class="minecraft-font">Anna Kaczkowska</h4>
+                    <h4 class="minecraft-font">Natalia Nawrot</h4>
+                    <h4 class="minecraft-font">Zuzanna Koc</h4>
+                </div>
+                <div class="spec-item">
+                    <p></p>
+                </div>
                 <p class="column-description">
-                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum pa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
                 </p>
 
                 <div class="specs-grid">
                     <div class="spec-item">
-                        <h4>Lorem ipsum</h4>
-                        <p>Lorem ipsum</p>
+                        <h4 class="minecraft-font">Material</h4>
+                        <p>Beton</p>
                     </div>
                     <div class="spec-item">
-                        <h4>Lorem ipsum</h4>
-                        <p>Lorem ipsum</p>
+                        <h4 class="minecraft-font">Height</h4>
+                        <p>210 cm</p>
                     </div>
                     <div class="spec-item">
-                        <h4>Lorem ipsum</h4>
-                        <p>Lorem ipsum</p>
+                        <h4 class="minecraft-font">Radius</h4>
+                        <p>14-22 cm</p>
                     </div>
                     <div class="spec-item">
-                        <h4>Lorem ipsum</h4>
-                        <p>Lorem ipsum</p>
+                        <h4 class="minecraft-font">Volume</h4>
+                        <p>0.045 m^3 </p>
                     </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Pełnoekranowy obraz -->
-    <section class="fullscreen-section">
-        <div class="container">
-        <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Proces produkcji" class="image-full">
-        </div>
-    </section>
-
-    <!-- Sekcja procesu -->
-    <section class="fullscreen-section">
-        <div class="container">
-            <div class="split-section">
-            <div>
-                <h2 class="column-title">Proces twórczy</h2>
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="process-step-number">1</div>
-                        <h3>Lorem ipsum</h3>
-                        <p class="column-description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="process-step-number">2</div>
-                        <h3>Lorem ipsum</h3>
-                        <p class="column-description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="process-step-number">3</div>
-                        <h3>Lorem ipsum</h3>
-                        <p class="column-description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Proces produkcji" class="image-full">
-            </div>
-        </div>
-        </div>
-    </section>
-
-    <!-- Galeria -->
     <section class="container">
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Detal 1">
+        <div class="variant-section">
+            <div class="column-info">
+                <h2 class="column-title minecraft-font">>> PARAMETRY</h2>
+                <p class="column-description">
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt i
+                </p>
             </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Detal 2">
+            <div class="square-image-container">
+                <img src="images/1/1_2.png" alt="Warianty parametryczne" class="large-image">
             </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Detal 3">
+        </div>
+    </section>
+
+
+    <section class="container">
+        <div class="variant-section">
+            <div class="square-image-container">
+                <img src="images/1/1_6.png" alt="Warianty parametryczne" class="large-image">
+            </div>
+            <div class="column-info">
+                <div class="column-meta">SYMETRYCZNE WCIĘCIE + WZMOCNIENIE</div>
+                <h2 class="column-title minecraft-font">>> WARIACJE KOLUMNY</h2>
+                <p class="column-description">
+                    Wariant kolumny z symetrycznymi wcięciami i wzmocnioną strukturą. Etap pośredni w rozwoju formy kolumny, pokazujący ewolucję projektu. Grafika obok prezentuje różne warianty parametryczne kolumny, które zostały przeanalizowane w procesie projektowym.
+                </p>
+                <div class="specs-grid" style="margin-top: 2rem;">
+                    <div class="spec-item">
+                        <h4 class="minecraft-font">Liczba wariantów</h4>
+                        <p>12 analizowanych konfiguracji</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4 class="minecraft-font">Optymalizacja</h4>
+                        <p>3 kryteria wyboru</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja procesu z trzema obrazami -->
+    <section class="container">
+        <h2 class="column-title minecraft-font" style="text-align: center; margin-bottom: 3rem;">>> PROCES </h2>
+
+        <div class="process-gallery">
+            <div class="process-image">
+                <img src="images/1/1_3.png" alt="Proces – etap 1">
+                <div class="process-image-caption">
+                    <h3 class="minecraft-font">ETAP 1</h3>
+                    <p>Pokaz procesu generatywnego - pierwsza faza tworzenia formy kolumny.</p>
+                </div>
+            </div>
+            <div class="process-image">
+                <img src="images/1/1_4.png" alt="Proces – etap 2">
+                <div class="process-image-caption">
+                    <h3 class="minecraft-font">ETAP 2</h3>
+                    <p>Druga faza rozwoju struktury i kształtu kolumny.</p>
+                </div>
+            </div>
+            <div class="process-image">
+                <img src="images/1/1_5.png" alt="Proces – etap 3">
+                <div class="process-image-caption">
+                    <h3 class="minecraft-font">ETAP 3</h3>
+                    <p>Finałowe dopracowanie detali i struktury kolumny.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -606,49 +790,131 @@
     <section class="fullscreen-section">
         <div class="container">
             <div class="split-section">
-            <div>
-                <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Materiał" class="image-full">
-            </div>
-            <div>
-                <h2 class="column-title">Lorem ipsum</h2>
-                <p class="column-description">
-                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
-                </p>
-                <div class="specs-grid" style="margin-top: 2rem;">
-                    <div class="spec-item">
-                        <h4>Lorem ipsum</h4>
-                        <p>Lorem ipsum</p>
-                    </div>
-                    <div class="spec-item">
-                        <h4>Lorem ipsum</h4>
-                        <p>Lorem ipsum, Lorem ipsum.</p>
+                <div class="square-image-container">
+                    <img src="images/1/1_9.png" alt="Finalna kolumna – detal" class="square-image">
+                </div>
+                <div>
+                    <h2 class="column-title minecraft-font">>> DETAL WYBRANY</h2>
+                    <p class="column-description">
+                        Finalna wersja kolumny prezentująca wszystkie charakterystyczne elementy projektu. Detal pokazuje precyzję wykonania i jakość materiałów użytych w projekcie.
+                    </p>
+                    <div class="specs-grid" style="margin-top: 2rem;">
+                        <div class="spec-item">
+                            <h4 class="minecraft-font">Technologia</h4>
+                            <p>Druk 3D + odlew betonowy</p>
+                        </div>
+                        <div class="spec-item">
+                            <h4 class="minecraft-font">Powierzchnia</h4>
+                            <p>Strukturalna, fakturalna</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Sekcja z modelem pawilonu -->
+    <section class="container">
+        <div class="model-section">
+            <div class="column-info">
+                <h2 class="column-title minecraft-font">>> PAWILON</h2>
+                <p class="column-description">
+                    Model całego pawilonu pokazujący kolumny w kontekście architektonicznym. Prezentacja układu przestrzennego i relacji między elementami struktury. Pawilon został zaprojektowany jako system modułowy, gdzie każda kolumna pełni zarówno funkcję konstrukcyjną, jak i estetyczną.
+                </p>
+                <div class="specs-grid" style="margin-top: 2rem;">
+                    <div class="spec-item">
+                        <h4 class="minecraft-font">Liczba kolumn</h4>
+                        <p>12 elementów nośnych</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4 class="minecraft-font">Konfiguracja</h4>
+                        <p>3 różne typy modułów</p>
+                    </div>
+                </div>
+            </div>
+            <div class="model-container">
+                <model-viewer
+                        src="models/pawilon-1.gltf"
+                        ios-src="models/pawilon-1.usdz"
+                        alt="Model kolumny betonowej"
+                        ar
+                        ar-modes="scene-viewer quick-look webxr"
+                        environment-image="neutral"
+                        auto-rotate
+                        camera-controls
+                        field-of-view="25deg"
+                        style="width: 100%; height: 1000px;"
+                        exposure="0.6";>
+                </model-viewer>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria wizualizacji pawilonu -->
+    <section class="container">
+        <h2 class="column-title minecraft-font" style="text-align: center; margin-bottom: 3rem;">>> WIZUALIZACJE KONTEKSTOWE</h2>
+        <div class="process-gallery">
+            <div class="process-image">
+                <img src="images/1/1_7.png" alt="Pawilon – widok ogólny">
+                <div class="gallery-caption">
+                    <h3 class="minecraft-font">WIDOK</h3>
+                    <p>Prezentacja pawilonu w pełnej skali z otoczeniem</p>
+                </div>
+            </div>
+            <div class="process-image">
+                <img src="images/1/1_8.png" alt="Pawilon – detale konstrukcyjne">
+                <div class="gallery-caption">
+                    <h3 class="minecraft-font">DETALE KONSTRUKCYJNE</h3>
+                    <p>Połączenia między elementami i system nośny</p>
+                </div>
+            </div>
+            <div class="process-image">
+                <img src="images/1/1_wiz.jpeg" alt="Pawilon – detale konstrukcyjne">
+                <div class="gallery-caption">
+                    <h3 class="minecraft-font">DETALE KONSTRUKCYJNE</h3>
+                    <p>Połączenia między elementami i system nośny</p>
+                </div>
+            </div>
         </div>
     </section>
 </main>
 
-<!-- Stopka - identyczna jak na landing page -->
 <!-- Stopka -->
 <footer id="contact" class="footer">
     <div class="container">
         <div class="footer-grid">
             <div>
-                <h3 class="footer-title">Pawilon XYZ</h3>
-                <p>lorem ipsum</p>
+                <h3 class="footer-title">Projekt // W Formie</h3>
+                <p>Wykonany w ramach przedmiotu "Projekt wybieralny" specjalności Architektura Informacyjna na WAPW</p>
             </div>
 
             <div>
                 <h3 class="footer-title">Kontakt</h3>
-                <p>xyz@gmail.com</p>
+                <div>Prowadzący: dr inż. arch. Marcin Strzała </div>
+                <p>marcin.strzala@pw.edu.pl</p>
             </div>
 
             <div>
                 <h3 class="footer-title">Autorzy</h3>
-                <p>Projekt: </p>
-                <p>Prowadzący: </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.25rem;">
+                    <span>Magdalena Barcicka</span>
+                    <span>Matylda Dubaniowska</span>
+                    <span>Anna Kaczkowska</span>
+                    <span>Krzysztof Stenzel</span>
+                    <span>Zuzanna Koc</span>
+                    <span>Julia Nazarska</span>
+                    <span>Olga Partyka</span>
+                    <span>Hanna Gabryszewska</span>
+                    <span>Natalia Dominiak</span>
+                    <span>Natalia Nawrot</span>
+                    <span>Paweł Lapczyk</span>
+                    <span>Maja Przygodzka</span>
+                    <span>Antoni Jakubiszyn</span>
+                    <span>Adam Bogumił</span>
+                    <span>Jakub Hunt</span>
+                </div>
             </div>
         </div>
     </div>
@@ -665,7 +931,7 @@
         const isActive = menuToggle.classList.toggle('active');
         mobileMenu.classList.toggle('active');
         blurOverlay.classList.toggle('active');
-        body.classList.toggle('menu-open'); // użyj tej klasy zamiast 'no-scroll'
+        body.classList.toggle('menu-open');
 
         const spans = menuToggle.querySelectorAll('span');
         if (isActive) {
@@ -698,19 +964,17 @@
     window.addEventListener('scroll', () => {
         const nav = document.querySelector('.main-nav');
         if (window.scrollY > 100) {
-            nav.style.mixBlendMode = 'normal';
-            nav.style.color = 'var(--black)';
-            nav.style.backgroundColor = 'rgba(255,255,255,0.9)';
+            nav.style.backgroundColor = 'rgba(255,255,255,0.95)';
         } else {
-            nav.style.mixBlendMode = 'difference';
-            nav.style.color = 'var(--white)';
-            nav.style.backgroundColor = 'transparent';
+            nav.style.backgroundColor = 'rgba(255,255,255,0.9)';
         }
     });
 
-    document.querySelector('model-viewer')?.addEventListener('load', function() {
-        this.cameraTarget = '-10m 15m -8.21m';
-        this.updateFraming?.();
+    document.querySelectorAll('model-viewer').forEach(viewer => {
+        viewer.addEventListener('load', function() {
+            this.cameraTarget = '-10m 15m -8.21m';
+            this.updateFraming?.();
+        });
     });
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

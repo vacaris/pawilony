@@ -4,15 +4,17 @@
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Merriweather+Sans:wght@300&family=Yeseva+One&display=swap" rel="stylesheet">
-  <title>Pawilon XYZ | Generatywne Kolumny Betonowe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+  <title>W Formie | Kolumny Betonowe</title>
   <style>
     :root {
       --black: #000000;
       --white: #FFFFFF;
-      --gray: #EEEEEE;
-      --dark-gray: #888888;
+      --white: #EEEEEE;
+      --dark-white: #888888;
       --text: #1A1A1A;
+      --magenta: #FF00FF;
       --transition: 0.4s cubic-bezier(0.65, 0, 0.35, 1);
       --scale-factor: 1.2;
     }
@@ -29,13 +31,58 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--text);
-      background-color: var(--white);
+      font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: white;
+      background-image: url('images/main/plakat_2.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
       line-height: 1.6;
       font-weight: 400;
+      position: relative;
+      background-color: rgba(0, 0, 0, 0.1);
+      background-blend-mode: overlay;
+    }
+
+    body,
+    body p,
+    body h1,
+    body h2,
+    body h3,
+    body h4 {
+      color: var(--white);
+    }
+
+    /* Tylko dla sekcji z czarnym tłem */
+    .dark-section {
+      position: relative;
+      background-color: var(--black);
+      color: var(--white);
+      overflow: hidden;
+    }
+
+
+    /* Minecraft font dla specjalnych elementów */
+    .minecraft-font {
+      font-family: 'Minecraft', sans-serif;
+      font-weight: normal;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .magenta-text {
+      color: var(--magenta);
+    }
+
+    .date-highlight {
+      font-family: 'Minecraft', sans-serif;
+      font-size: 1.5rem;
+      color: var(--magenta);
+      margin: 2rem 0;
+      text-align: center;
     }
 
     body.no-scroll {
@@ -44,27 +91,41 @@
     }
 
     h1, h2, h3, h4 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
       letter-spacing: -0.01em;
       line-height: 1.2;
     }
 
+    /* Minecraft font tylko dla specjalnych elementów */
+    .minecraft-font {
+      font-family: 'Minecraft', sans-serif;
+      font-weight: normal;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
     .map-bar-center {
-      font-family: 'Merriweather', serif; /* lub inny elegancki */
+      font-family: 'Lato', sans-serif;
       font-style: italic;
+      font-weight: 300;
       font-size: 1rem;
       text-align: center;
-      color: #222;
+      color: var(--white);
       width: 100%;
       line-height: 1.5;
     }
 
     p {
       line-height: 1.6;
-      color: var(--dark-gray);
+      color: var(--text);
       font-size: 1rem;
       font-weight: 400;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .dark-section p {
+      color: var(--white);
     }
 
     a {
@@ -103,20 +164,59 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      mix-blend-mode: difference;
       color: var(--white);
       transition: all 0.3s ease;
       font-weight: 500;
     }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      font-size: calc(1.8rem * var(--scale-factor));
+      padding-left: 23px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      font-family: 'Minecraft', sans-serif;
+      text-transform: uppercase;
+      transition: font-size 0.3s ease;
+    }
+
+    .white-logo {
+      display: block;
+      height: 50px;
+      width: auto;
+      opacity: 0.8;
+      transition: filter 0.3s ease;
+    }
+    .black-logo {
+      display: none;
+      height: 50px;
+      width: auto;
+      opacity: 1;
+      transition: filter 0.3s ease;
+    }
+
+    .main-nav.scrolled .white-logo {
+      display: none;
+    }
+    .main-nav.scrolled .black-logo {
+      display: block;
+    }
+
+
     /* Model Viewer Styles */
     .model-container {
       width: 100%;
-      height: 90vh; /* Zwiększ wysokość */
+      height: 90vh;
       min-height: 600px;
       position: relative;
       margin: 0;
       z-index: 2;
-      overflow: visible; /* Dodaj to, aby model nie był przycinany */
+      overflow: visible;
     }
 
     model-viewer {
@@ -146,12 +246,6 @@
       }
     }
 
-    .logo {
-      font-size: calc(1.125rem * var(--scale-factor));
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
-
     .menu-toggle {
       display: flex;
       flex-direction: column;
@@ -160,7 +254,7 @@
       height: calc(18px * var(--scale-factor));
       cursor: pointer;
       z-index: 1001;
-      position: relative; /* Dodane */
+      position: relative;
     }
 
     .menu-toggle span {
@@ -170,7 +264,7 @@
       background-color: currentColor;
       transition: all var(--transition);
       transform-origin: center;
-      position: absolute; /* Zmienione z display: block */
+      position: absolute;
       left: 0;
     }
 
@@ -187,7 +281,6 @@
       bottom: 0;
     }
 
-    /* Animacja aktywnego stanu */
     .menu-toggle.active span:nth-child(1) {
       transform: translateY(calc(8px * var(--scale-factor))) rotate(45deg);
       top: 50%;
@@ -204,13 +297,25 @@
     }
 
     .nav-links {
-      display: none !important;
+      display: none;
       gap: calc(2.5rem * var(--scale-factor));
     }
+
+    @media (min-width: 10000px) {
+      .nav-links {
+        display: flex !important;
+      }
+      .menu-toggle {
+        display: none !important;
+      }
+    }
+
 
     .nav-link {
       position: relative;
       font-size: calc(1rem * var(--scale-factor));
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
     }
 
     .nav-link::after {
@@ -234,7 +339,7 @@
       left: 0;
       width: 100%;
       height: 100vh;
-      background-color: rgba(255, 255, 255, 0.95);
+      background-color: rgba(0, 0, 0, 0.95);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       z-index: 1000;
@@ -248,14 +353,14 @@
     .mobile-menu.active {
       display: flex;
     }
+
     @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
       .mobile-menu {
-        background-color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(0, 0, 0, 0.8);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
       }
     }
-
 
     .mobile-links {
       display: flex;
@@ -266,14 +371,14 @@
 
     .mobile-link {
       font-size: calc(2rem * var(--scale-factor));
-      color: var(--black);
+      color: var(--white);
       transition: color var(--transition);
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
+      font-family: 'Minecraft', sans-serif;
+      font-weight: 700;
     }
 
     .mobile-link:hover {
-      color: var(--dark-gray);
+      color: var(--white);
     }
 
     .close-btn {
@@ -283,7 +388,8 @@
       font-size: calc(3rem);
       cursor: pointer;
       display: none;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Lato', sans-serif;
+      color: var(--white);
     }
 
     .mobile-menu.active .close-btn {
@@ -293,8 +399,8 @@
     .hero {
       position: relative;
       overflow: visible;
-      padding: 6rem 0 8rem; /* Zmniejsz padding, aby dać więcej miejsca modelowi */
-      margin-bottom: 4rem; /* Dodaj margines na dole */
+      padding: 6rem 0 8rem;
+      margin-bottom: 0rem;
     }
     .model-container {
       width: 100%;
@@ -316,7 +422,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
-      align-items: start; /* Wyrównanie do góry */
+      align-items: start;
       position: relative;
       z-index: 3;
     }
@@ -330,7 +436,7 @@
         height: 70vh;
         min-height: 500px;
         margin-top: 2rem;
-        order: 1; /* Model na dole na mobile */
+        order: 1;
       }
 
       model-viewer {
@@ -356,22 +462,25 @@
 
     .hero-text {
       max-width: 700px;
-      margin-left: 0; /* Usunięcie specjalnego marginesu */
+      margin-left: 0;
+      color: var(--white);
     }
 
     .hero-title {
       font-size: clamp(2.5rem, 6vw, 4rem);
       line-height: 1.1;
       margin-bottom: 1.5rem;
-      font-weight: 400;
+      font-weight: 900;
     }
 
     .hero-subtitle {
-      font-size: 1.125rem;
+      font-size: 1.3rem;
       line-height: 1.6;
       margin-bottom: 2rem;
       font-weight: 400;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Lato', sans-serif;
+      color: var(--white);
+      max-width: 500px;
     }
 
     .hero-image {
@@ -381,10 +490,31 @@
       width: 100%;
       height: 400px;
     }
+    .minecraft-date {
+      font-family: 'Minecraft', sans-serif;
+      font-size: 2rem;
+      margin-top: 1.5rem;
+      text-align: left;
+    }
+
+    .date-part,
+    .date-separator {
+      color: var(--magenta);
+    }
+
+    .date-separator {
+      padding: 0 0.4rem;
+    }
+
 
     /* Sekcje */
     .section {
       padding: calc(2.5rem * var(--scale-factor)) 0;
+    }
+
+    .dark-section {
+      background-color: rgba(0, 0, 0, 0.7);
+      color: var(--white);
     }
 
     .section-header {
@@ -399,7 +529,7 @@
     .section-title {
       font-size: clamp(2rem, 5vw, 3rem);
       margin-bottom: calc(1.5rem * var(--scale-factor));
-      font-weight: 400;
+      font-weight: 900;
     }
 
     /* Sekcja Mapy */
@@ -408,8 +538,8 @@
       width: 100%;
       aspect-ratio: 3 / 2;
       overflow: hidden;
-      background-color: var(--gray);
-      margin-bottom: 0;
+      background-color: transparent !important;
+      margin-bottom: 0!important;
     }
 
     .map-image {
@@ -418,12 +548,21 @@
       object-fit: cover;
       display: block;
     }
+    #map {
+      background-color: rgba(0, 0, 0, 0.5); /* podobne do .dark-section */
+      background-blend-mode: overlay;
+      color: var(--white);
+      margin: 0;
+      padding: 0;
+    }
+
 
     .map-marker {
       position: absolute;
       width: calc(12px * var(--scale-factor));
       height: calc(12px * var(--scale-factor));
-      background-color: var(--black);
+      background-color: var(--magenta);
+      border: 2px solid darkmagenta;
       border-radius: 50%;
       transform: translate(-50%, -50%);
       cursor: pointer;
@@ -443,16 +582,19 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background-color: var(--black);
+      background-color: var(--magenta);
       animation: pulse 2s infinite;
       z-index: -1;
+      opacity: 0.5;
     }
+
 
     .map-footer-bar {
       padding: 2rem 0;
-      border-top: 1px solid var(--gray);
-      border-bottom: 1px solid var(--gray);
-      margin: 3rem 0;
+      border-top: 1px solid var(--white);
+      border-bottom: 1px solid var(--white);
+      margin: 0;
+      background-color: rgba(0, 0, 0, 0.8);
     }
 
     .map-footer-content {
@@ -478,10 +620,11 @@
     }
 
     .map-bar-left {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Lato', sans-serif;
       font-weight: 300;
       white-space: nowrap;
       font-size: 1rem;
+      color: var(--white);
     }
 
     .map-bar-left span {
@@ -489,19 +632,20 @@
     }
 
     .map-bar-center {
-      font-family: 'Inter', sans-serif;
-      color: #444;
+      font-family: 'Lato', sans-serif;
+      color: var(--white);
       text-align: center;
       flex: 1;
     }
 
     .map-bar-right a {
-      background-color: black;
-      color: white;
+      background-color: var(--white);
+      background-blend-mode: overlay;
+      color: var(--black);
       padding: 0.75rem 1.6rem;
       border-radius: 2rem;
-      font-weight: 500;
-      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-family: 'Lato', sans-serif;
       text-decoration: none;
       transition: background-color 0.3s ease;
       white-space: nowrap;
@@ -509,7 +653,7 @@
     }
 
     .map-bar-right a:hover {
-      background-color: #222;
+      background-color: #DDD;
     }
 
     @keyframes pulse {
@@ -523,13 +667,14 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: calc(1.5rem * var(--scale-factor));
-      padding: 0 calc(3rem * var(--scale-factor)); /* Dodane */
+      padding: 0 calc(3rem * var(--scale-factor));
     }
 
     .column-item {
       position: relative;
       overflow: hidden;
-      aspect-ratio: unset; /* usuń ograniczenie proporcji */
+      aspect-ratio: unset;
+      transition: transform 0.3s ease;
     }
 
     .column-image {
@@ -552,28 +697,30 @@
       transition: transform 0.4s ease-out, opacity 0.4s ease-out;
     }
 
+    .column-item:hover {
+      transform: translateY(-5px);
+    }
+
     .column-item:hover .column-info {
       transform: translateY(0);
       opacity: 1;
     }
     .column-item:hover .column-image {
-      transform: scale(1.01) translateY(-0.5px);
+      transform: scale(1.05);
     }
-
-
 
     .column-number {
       font-size: calc(0.875rem * var(--scale-factor));
       margin-bottom: calc(0.5rem * var(--scale-factor));
       opacity: 0.7;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Lato', sans-serif;
     }
 
     .column-title {
       font-size: calc(1.5rem * var(--scale-factor));
       margin-bottom: calc(0.5rem * var(--scale-factor));
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
     }
 
     /* Nowoczesna sekcja procesu */
@@ -585,12 +732,25 @@
     }
 
     .process-item {
-      border-left: 2px solid var(--black);
-      padding-left: 3rem;
+      border-left: 2px solid var(--white);
+      padding-left: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .dark-section .process-item {
+      border-left-color: var(--white);
+      color: var(--white);
     }
 
     .process-item h3 {
-      content: none;
+      font-family: 'Minecraft', sans-serif;
+      text-transform: uppercase;
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: baseline;
+      white-space: pre-wrap;
     }
 
     .process-item h3::before {
@@ -600,11 +760,18 @@
       top: 0.5rem;
       width: 1rem;
       height: 2px;
-      background-color: var(--black);
+      background-color: var(--white);
+    }
+
+    .dark-section .process-item h3::before {
+      background-color: var(--white);
     }
 
     .process-item p {
-      margin-bottom: 1.5rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0;
     }
 
     /* Galeria szczegółów */
@@ -617,25 +784,34 @@
 
     .detail-image {
       width: 100%;
-      height: calc(300px * var(--scale-factor));
+      height: calc(400px * var(--scale-factor));
       object-fit: cover;
+      object-position: center;
+      border-radius: 4px;
     }
 
     .detail-info {
       max-width: calc(600px * var(--scale-factor));
       margin-bottom: calc(4rem * var(--scale-factor));
+      color: var(--text);
+    }
+
+    .dark-section .detail-info {
+      color: var(--white);
     }
 
     .detail-info h3 {
       font-size: calc(1.5rem * var(--scale-factor));
       margin-bottom: calc(1rem * var(--scale-factor));
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      color: inherit;
     }
 
     .detail-info p {
       margin-bottom: calc(2rem * var(--scale-factor));
-      font-family: 'Inter', sans-serif;
+      font-family: 'Lato', sans-serif;
+      color: inherit;
     }
 
     .detail-back {
@@ -646,7 +822,13 @@
       padding-bottom: calc(0.25rem * var(--scale-factor));
       border-bottom: 1px solid var(--black);
       transition: opacity var(--transition);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Lato', sans-serif;
+      color: var(--text);
+    }
+
+    .dark-section .detail-back {
+      border-bottom-color: var(--white);
+      color: var(--white);
     }
 
     .detail-back:hover {
@@ -656,7 +838,9 @@
     /* Stopka */
     .footer {
       padding: calc(6rem * var(--scale-factor)) 0;
-      border-top: 1px solid var(--gray);
+      border-top: 1px solid var(--white);
+      background-color: rgba(0, 0, 0, 0.9);
+      color: var(--white);
     }
 
     .footer-grid {
@@ -668,29 +852,34 @@
     .footer-title {
       font-size: calc(0.875rem * var(--scale-factor));
       margin-bottom: calc(1.5rem * var(--scale-factor));
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
+      color: var(--white);
     }
 
     .footer p {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Lato', sans-serif;
+      color: var(--white);
     }
 
     .cover {
       padding: calc(10rem * var(--scale-factor)) calc(2rem * var(--scale-factor)) calc(6rem * var(--scale-factor));
       text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: var(--white);
     }
 
     .cover h1 {
       font-size: clamp(2rem, 6vw, 3.5rem);
       line-height: 1.2;
-      font-weight: 400;
+      font-weight: 900;
       max-width: calc(800px * var(--scale-factor));
       margin: 0 auto;
       transition: all 0.4s ease-out;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Lato', sans-serif;
+      color: var(--white);
     }
 
     .top-options {
@@ -702,23 +891,23 @@
     }
 
     .top-options a {
-      color: var(--dark-gray);
-      font-weight: 500;
+      color: var(--magenta);
+      font-weight: 700;
       text-transform: lowercase;
       transition: var(--transition);
       position: relative;
       padding: calc(0.25rem * var(--scale-factor)) 0;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 1.2rem;
     }
 
     .top-options a:hover {
-      color: var(--black);
+      color: var(--magenta);
     }
 
     .top-options a.active {
-      color: var(--black);
-      font-weight: 600;
+      color: var(--magenta);
+      font-weight: 900;
     }
 
     .top-options a.active::after {
@@ -728,7 +917,7 @@
       left: 0;
       width: 100%;
       height: 2px;
-      background-color: var(--black);
+      background-color: var(--magenta);
       animation: underlineIn 0.3s ease-out;
     }
 
@@ -743,6 +932,7 @@
       max-width: 1200px;
       margin-left: auto;
       margin-right: auto;
+      color: var(--white);
     }
 
     .map-description-text {
@@ -750,17 +940,17 @@
     }
 
     .map-description-text h4 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Lato', sans-serif;
       font-size: 1.75rem;
       margin-bottom: 1rem;
-      color: var(--text);
-      font-weight: 400;
+      color: var(--white);
+      font-weight: 900;
     }
 
     .map-description-text p {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Lato', sans-serif;
       font-size: 1rem;
-      color: var(--dark-gray);
+      color: var(--white);
       line-height: 1.7;
     }
 
@@ -772,19 +962,21 @@
     }
 
     .map-btn {
-      background-color: black;
-      color: white;
-      font-family: 'Inter', sans-serif;
+      background-color: var(--white);
+      color: var(--black);
+      font-family: 'Lato', sans-serif;
       padding: 0.75rem 1.5rem;
       border-radius: 2rem;
       text-decoration: none;
       transition: background-color 0.3s ease;
       font-size: 0.875rem;
+      font-weight: 700;
     }
 
     .map-btn:hover {
-      background-color: #333;
+      background-color: #DDD;
     }
+
 
     @keyframes underlineIn {
       from { transform: scaleX(0); }
@@ -794,6 +986,9 @@
     .highlight-underline {
       position: relative;
       display: inline-block;
+      color: var(--white);
+      transition: background-color 0.3s ease;
+
     }
 
     .highlight-underline::after {
@@ -803,22 +998,27 @@
       left: 0;
       width: 100%;
       height: 2px;
-      background-color: var(--text);
+      background-color: var(--white);
       transition: background-color 0.3s ease;
     }
 
-    .highlight-underline:hover::after {
-      background-color: var(--black);
+    .highlight-underline:hover {
+      color: var(--magenta);
     }
+
+    .highlight-underline:hover::after {
+      background-color: var(--magenta);
+    }
+
     .blur-overlay {
       position: absolute;
       inset: 0;
       backdrop-filter: blur(10px);
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(0, 0, 0, 0.5);
       z-index: 998;
       opacity: 0;
       pointer-events: none;
-    transition: opacity 0.3s ease;
+      transition: opacity 0.3s ease;
       will-change: opacity;
     }
     .blur-overlay.active {
@@ -826,7 +1026,6 @@
       opacity: 1;
       pointer-events: auto;
     }
-
 
     /* Responsywność */
     @media (max-width: 768px) {
@@ -872,7 +1071,8 @@
       }
 
       .section {
-        padding: calc(4rem * var(--scale-factor)) 0; /* Jeszcze mniejszy padding na mobile */
+        padding: calc(4rem * var(--scale-factor)) 0;
+        color: white !important;
       }
 
       .map-container {
@@ -907,9 +1107,20 @@
 
       .process-grid {
         grid-template-columns: 1fr;
+        color: white !important;
+      }
+      .process-step {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
 
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
     @media (max-width: 480px) {
       .container {
         padding: 0 calc(1.25rem * var(--scale-factor));
@@ -921,6 +1132,10 @@
 
       .mobile-link {
         font-size: calc(1.5rem * var(--scale-factor));
+      }
+
+      .specialization-logo {
+        height: 18px;
       }
     }
 
@@ -936,15 +1151,15 @@
       }
     }
     .mobile-map-info {
-      display: none; /* domyślnie ukryte */
+      display: none;
       flex-direction: column;
       gap: 0.25rem;
       margin-top: 3rem;
       margin-left: 2rem;
       align-items: flex-start;
       text-align: left;
-      color: var(--text);
-      font-family: 'Merriweather', serif;
+      color: var(--white);
+      font-family: 'Lato', sans-serif;
     }
 
     .mobile-map-line1 {
@@ -957,7 +1172,7 @@
       font-size: 1rem;
       font-style: italic;
     }
-    /* Dodaj to do swojego CSS */
+
     model-viewer::part(default-progress-bar) {
       display: none;
     }
@@ -981,19 +1196,109 @@
       }
     }
 
+    /* Dodatkowe style dla elementów z czcionką Minecraft */
+    .pawilony-title {
+      font-family: 'Minecraft', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    /* Dodatkowe style dla daty */
+    .exhibition-date {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: 'Minecraft', sans-serif;
+      font-size: 1.2rem;
+      color: var(--magenta);
+      z-index: 10;
+    }
+
+    /* Style dla nagłówków w Minecraft */
+    .minecraft-heading {
+      font-family: 'Minecraft', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+    .section.dark-section * {
+      color: white !important;
+    }
+
+    /* Responsywność daty */
+    @media (max-width: 768px) {
+      .exhibition-date {
+        position: static;
+        text-align: center;
+        margin: 1rem 0;
+      }
+    }
+    #columns {
+      background-color: rgba(0, 0, 0, 0.7);
+      background-blend-mode: overlay;
+      color: white;
+    }
+    /* Animacja ładowania */
+    .loading-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--magenta);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: fadeOut 0.5s ease-out 2s forwards;
+    }
+
+    .loading-text {
+      font-family: 'Minecraft', sans-serif;
+      font-size: 4rem;
+      color: var(--black);
+      text-transform: uppercase;
+      opacity: 0;
+      animation:
+              fadeIn 0.5s ease-out 0.5s forwards,
+              pulse 1s ease-in-out 1s infinite alternate;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
   </style>
 </head>
 <body>
+<div class="loading-animation" id="loadingAnimation">
+  <div class="loading-text">W FORMIE</div>
+</div>
+
 <!-- Nawigacja -->
 <nav class="main-nav">
-  <div class="logo">Pawilon XYZ</div>
+  <div class="logo-container">
+    <div class="logo">// W FORMIE</div>
+    <img src="images/main/logoai.png" alt="Logo specjalności" class="white-logo">
+    <img src="images/main/logoai_czarne.png" alt="Logo specjalności czarne" class="black-logo">
+  </div>
 
   <div class="nav-links">
-    <a href="#intro" class="nav-link">Wstęp</a>
-    <a href="#columns" class="nav-link">Kolumny</a>
+    <a href="#intro" class="nav-link">Intro</a>
+    <a href="#columns" class="nav-link">Pawilony</a>
     <a href="#map" class="nav-link">Mapa</a>
     <a href="#process" class="nav-link">Proces</a>
-    <a href="#contact" class="nav-link">Kontakt</a>
+    <a href="autorzy.html" class="mobile-link">Autorzy</a>
   </div>
 
   <div class="menu-toggle" id="menuToggle">
@@ -1008,21 +1313,20 @@
 <div class="mobile-menu" id="mobileMenu">
   <div class="close-btn" id="closeBtn">×</div>
   <div class="mobile-links">
-    <a href="#intro" class="mobile-link">Wstęp</a>
-    <a href="#columns" class="mobile-link">Kolumny</a>
+    <a href="#intro" class="mobile-link">Intro</a>
+    <a href="#columns" class="mobile-link">Pawilony</a>
     <a href="#map" class="mobile-link">Mapa</a>
     <a href="#process" class="mobile-link">Proces</a>
-    <a href="#contact" class="mobile-link">Kontakt</a>
+    <a href="autorzy.html" class="mobile-link">Autorzy</a>
   </div>
   <div class="mobile-map-info">
-    <div class="mobile-map-line1">Redefining Beton — Site Design</div>
-    <div class="mobile-map-line2">Sześć kolumn. Jedna idea. Beton, który mówi.</div>
+    <div class="mobile-map-line1">Gdzie stoją kolumny?</div>
+    <div class="mobile-map-line2">Rozmieszczenie kolumn na terenie kampusu</div>
   </div>
 </div>
 
-
 <!-- Sekcja Wstęp -->
-<section id="intro" class="cover visible">
+<section id="intro" class="cover dark-section">
   <div class="top-options">
     <a href="#" data-label="idea" class="active">idea</a>
     <a href="#" data-label="forma">design</a>
@@ -1030,35 +1334,39 @@
   </div>
 
   <h1 id="dynamic-heading">
-    Poznaj, jak <span class='highlight-underline'>architektura</span> łączy się z <span class='highlight-underline'>technologią</span> poprzez ekspresyjne kolumny redefiniujące sposób myślenia o betonie.
+    Zaprojektowaliśmy i wylaliśmy sześć betonowych <span class='highlight-underline'>kolumn</span>. Każda stanowi zalążek oddzielnego <span class='highlight-underline'>pawilonu</span> osadzonego w przestrzeni naszego kampusu.
   </h1>
 </section>
 
-<section class="hero">
+<section class="hero dark-section">
   <div class="container hero-grid">
     <div class="hero-text">
-      <h1 class="hero-title">KOLUMNY BETONOWE</h1>
+      <h1 id="scroll-to-columns" class="hero-title pawilony-title highlight-underline">>> kolumny </h1>
+      <p class="hero-subtitle"></p>
       <p class="hero-subtitle">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium...
+        Kolumny nie pełnią funkcji konstrukcyjnej, tylko są to przestrzenne znaki, które porządkują narrację i prowadzą przez sześć różnych podejść do architektury. Każda z nich nawiązuje do innego tematu: skali, rytmu, materiału, relacji z użytkownikiem czy otoczeniem. Stanowią wizualne przystanki, które budują rytm i tożsamość całego założenia. Zostały zaprezentowane na terenie Wydziału Architektury w dniach:</span>
       </p>
-      <a href="#columns" class="nav-link">Zobacz kolumny →</a>
+      <p class="minecraft-date">
+        <span class="date-part">//16.06</span>
+        <span class="date-separator"> – </span>
+        <span class="date-part">23.06</span>
+      </p>
     </div>
 
     <div class="model-container">
       <model-viewer
-              src="models/kolumna1.gltf"
-              alt="Kolumna 3D"
-              camera-controls
+              src="models/kolumna-1.gltf"
+              ios-src="models/kolumna-1.usdz"
+              alt="Model kolumny betonowej"
+              ar
+              ar-modes="scene-viewer quick-look webxr"
+              environment-image="neutral"
               auto-rotate
-              shadow-intensity="1"
-              exposure="0.55"
-              camera-orbit="90deg 55deg 3.5m"
-              camera-target="-10m 15m -8.21m"
-              field-of-view="45deg"
-              bounds="tight"
-              style="--poster-color: transparent;"
+              camera-controls
+              field-of-view="25deg"
+              style="width: 100%; height: 800px;"
+              exposure="0.6";>
       </model-viewer>
-
     </div>
   </div>
 </section>
@@ -1066,37 +1374,39 @@
 <!-- Sekcja Mapy -->
 <section id="map" class="section">
   <div class="map-wrapper">
-    <img src="images/mapa.png" alt="Mapa Kampusu" class="map-image">
-    <a href="kolumna1.html" class="map-marker" style="top: 30%; left: 25%;"></a>
-    <a href="kolumna2.html" class="map-marker" style="top: 45%; left: 40%;"></a>
-    <a href="kolumna3.html" class="map-marker" style="top: 60%; left: 35%;"></a>
-    <a href="kolumna4.html" class="map-marker" style="top: 35%; left: 65%;"></a>
-    <a href="kolumna5.html" class="map-marker" style="top: 55%; left: 75%;"></a>
-    <a href="kolumna6.html" class="map-marker" style="top: 70%; left: 55%;"></a>
+    <img src="images/main/AI-Mapka-1.png" alt="Mapa Kampusu" class="map-image">
+    <a href="kolumna5.html" class="map-marker" style="top: 33%; left: 17%;"></a>
+    <a href="kolumna4.html" class="map-marker" style="top: 39.5%; left: 23%;"></a>
+    <a href="kolumna3.html" class="map-marker" style="top: 41.5%; left: 24%;"></a>
+    <a href="kolumna1.html" class="map-marker" style="top: 63%; left: 33.5%;"></a>
+    <a href="kolumna2.html" class="map-marker" style="top: 84%; left: 29%;"></a>
+    <a href="kolumna6.html" class="map-marker" style="top: 44%; left: 34%;"></a>
   </div>
   <!-- Po sekcji z columns-grid, przed zamknięciem sekcji columns -->
   <div class="map-footer-bar">
     <div class="container">
       <div class="map-footer-content">
-        <div class="map-bar-left">Redefining Beton <span>— Site Design</span></div>
-        <div class="map-bar-center">Sześć kolumn. Jedna idea. Beton, który mówi.</div>
+        <div class="map-bar-left">Gdzie stoją pawilony? <span>— Mapa sytuacyjna</span></div>
+        <div class="map-bar-center">Od wspólnego procesu do sześciu lokalnych odpowiedzi na przestrzeń.</div>
       </div>
     </div>
   </div>
 </section>
 
+
+
 <!-- Sekcja Kolumn -->
-<section id="columns" class="section">
+<section id="columns" class="section dark-section">
   <div class="container">
     <div class="section-header" style="text-align: left;">
-      <h2 class="section-title">KOLUMNY</h2>
+      <h2 class="section-title pawilony-title">>> PAWILONY</h2>
     </div>
   </div>
 
   <div class="columns-grid">
     <!-- Kolumna 1 -->
     <a href="kolumna1.html" class="column-item">
-      <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kolumna 1" class="detail-image">
+      <img src="images/main/logo-1.jpg">
       <div class="column-info">
         <div class="column-number">01</div>
         <p>Lorem ipsum - lorem ipsum</p>
@@ -1104,8 +1414,8 @@
     </a>
 
     <!-- Kolumna 2 -->
-    <a href="kolumna1.html" class="column-item">
-      <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kolumna 2" class="detail-image">
+    <a href="kolumna2.html" class="column-item">
+      <img src="images/main/wstawka_1.jpg">
       <div class="column-info">
         <div class="column-number">02</div>
         <p>Lorem ipsum - lorem ipsum</p>
@@ -1113,8 +1423,8 @@
     </a>
 
     <!-- Kolumna 3 -->
-    <a href="kolumna1.html" class="column-item">
-      <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kolumna 3" class="detail-image">
+    <a href="kolumna3.html" class="column-item">
+      <img src="images/main/wstawka_1.jpg">
       <div class="column-info">
         <div class="column-number">03</div>
         <p>Lorem ipsum - lorem ipsum</p>
@@ -1122,8 +1432,8 @@
     </a>
 
     <!-- Kolumna 4 -->
-    <a href="kolumna1.html" class="column-item">
-      <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kolumna 4" class="detail-image">
+    <a href="kolumna4.html" class="column-item">
+      <img src="images/main/wstawka_1.jpg">
       <div class="column-info">
         <div class="column-number">04</div>
         <p>Lorem ipsum - lorem ipsum</p>
@@ -1131,8 +1441,8 @@
     </a>
 
     <!-- Kolumna 5 -->
-    <a href="kolumna1.html" class="column-item">
-      <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kolumna 5" class="detail-image">
+    <a href="kolumna5.html" class="column-item">
+      <img src="images/main/wstawka_1.jpg">
       <div class="column-info">
         <div class="column-number">05</div>
         <p>Lorem ipsum - lorem ipsum</p>
@@ -1140,8 +1450,8 @@
     </a>
 
     <!-- Kolumna 6 -->
-    <a href="kolumna1.html" class="column-item">
-      <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kolumna 6" class="detail-image">
+    <a href="kolumna6.html" class="column-item">
+      <img src="images/main/wstawka_1.jpg">
       <div class="column-info">
         <div class="column-number">06</div>
         <p>Lorem ipsum - lorem ipsum</p>
@@ -1152,36 +1462,42 @@
 
 
 <!-- Sekcja Procesu -->
-<section id="process" class="section">
+<section id="process" class="section dark-section">
   <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">PROCES</h2>
+    <div class="section-header" style="text-align: left;">
+      <h2 class="section-title pawilony-title">>> PROCES</h2>
     </div>
 
     <div class="detail-gallery">
-      <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Proces 1" class="detail-image">
-      <img src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Proces 1" class="detail-image">
+      <img src="images/main/proces-1.png" alt="Druk 3D prototypu" class="detail-image">
+      <img src="images/main/proces-2.png" alt="Wylewanie betonu" class="detail-image">
+      <img src="images/main/proces-3.jpg" alt="Zdejmowanie form" class="detail-image">
+      <img src="images/main/proces-4.png" alt="Testy pełnowymiarowe" class="detail-image">
     </div>
 
     <div class="process-grid">
       <div class="process-item">
-        <h3>Lorem ipsum</h3>
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        <h3 class="minecraft-font">1.  Druk 3D prototypu</h3>
+        <p>Druk pierwszego prototypu kolumny przy użyciu domowej drukarki 3D. Testowanie skali oraz jakości wydruku i detalu.</p>
       </div>
 
       <div class="process-item">
-        <h3>Lorem ipsum</h3>
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        <h3 class="minecraft-font">2.  Wylewanie betonu</h3>
+        <p>Wypełnienie form PLA betonem i oczekiwanie na jego związanie. Testy twardnienia oraz wytrzymałości materiału.</p>
       </div>
 
       <div class="process-item">
-        <h3>Lorem ipsum</h3>
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        <h3 class="minecraft-font">3.  Usuwanie form</h3>
+        <p>Delikatne usuwanie plastikowych szalunków za pomocą opalarki. Ocena odporności betonu oraz jakości powierzchni.</p>
+      </div>
+
+      <div class="process-item">
+        <h3 class="minecraft-font">4.  Próby pełnowymiarowe</h3>
+        <p>Składanie i zalewanie większych form w warunkach zewnętrznych. Testowanie spoin, stabilności oraz procesu montażowego.</p>
       </div>
     </div>
   </div>
 </section>
-
 
 
 <!-- Stopka -->
@@ -1189,19 +1505,36 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <h3 class="footer-title">Pawilon XYZ</h3>
-        <p>lorem ipsum</p>
+        <h3 class="footer-title">Projekt // W Formie</h3>
+        <p>Wykonany w ramach przedmiotu "Projekt wybieralny" specjalności Architektura Informacyjna na WAPW</p>
       </div>
 
       <div>
         <h3 class="footer-title">Kontakt</h3>
-        <p>xyz@gmail.com</p>
+        <div>Prowadzący: dr inż. arch. Marcin Strzała </div>
+        <p>marcin.strzala@pw.edu.pl</p>
       </div>
 
       <div>
         <h3 class="footer-title">Autorzy</h3>
-        <p>Projekt: </p>
-        <p>Prowadzący: </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.25rem;">
+          <span>Magdalena Barcicka</span>
+          <span>Matylda Dubaniowska</span>
+          <span>Anna Kaczkowska</span>
+          <span>Krzysztof Stenzel</span>
+          <span>Zuzanna Koc</span>
+          <span>Julia Nazarska</span>
+          <span>Olga Partyka</span>
+          <span>Hanna Gabryszewska</span>
+          <span>Natalia Dominiak</span>
+          <span>Natalia Nawrot</span>
+          <span>Paweł Lapczyk</span>
+          <span>Maja Przygodzka</span>
+          <span>Antoni Jakubiszyn</span>
+          <span>Adam Bogumił</span>
+          <span>Jakub Hunt</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1218,6 +1551,8 @@
   function toggleMenu() {
     const isActive = menuToggle.classList.toggle('active');
     mobileMenu.classList.toggle('active');
+    blurOverlay.classList.toggle('active');
+    body.classList.toggle('no-scroll');
 
     const spans = menuToggle.querySelectorAll('span');
     if (isActive) {
@@ -1231,14 +1566,8 @@
     }
   }
 
-
   menuToggle.addEventListener('click', toggleMenu);
-
-  closeBtn.addEventListener('click', function() {
-    if (mobileMenu.classList.contains('active')) {
-      toggleMenu();
-    }
-  });
+  closeBtn.addEventListener('click', toggleMenu);
 
   // Zamknij menu po kliknięciu w link
   document.querySelectorAll('.mobile-link').forEach(link => {
@@ -1249,18 +1578,30 @@
     });
   });
 
-
   // Efekt przewijania nawigacji
   window.addEventListener('scroll', () => {
     const nav = document.querySelector('.main-nav');
     if (window.scrollY > 100) {
+      nav.classList.add('scrolled');
       nav.style.mixBlendMode = 'normal';
       nav.style.color = 'var(--black)';
       nav.style.backgroundColor = 'rgba(255,255,255,0.9)';
     } else {
+      nav.classList.remove('scrolled');
       nav.style.mixBlendMode = 'difference';
       nav.style.color = 'var(--white)';
       nav.style.backgroundColor = 'transparent';
+    }
+  });
+
+  // Kliknięcie w tytuł "KOLUMNY" → przewinięcie do sekcji
+  document.getElementById('scroll-to-columns')?.addEventListener('click', () => {
+    const target = document.getElementById('columns');
+    if (target) {
+      window.scrollTo({
+        top: target.offsetTop - 80, // dopasuj, jeśli masz sticky nav
+        behavior: 'smooth'
+      });
     }
   });
 
@@ -1281,13 +1622,13 @@
 
         // Zamknij menu mobilne jeśli otwarte
         if (mobileMenu.classList.contains('active')) {
-          toggleMenu(); // <--- używamy toggleMenu zamiast closeMenu
+          toggleMenu();
         }
       }
     });
   });
 
-  // Efekty hover na zdjęciach — delikatniejszy
+  // Efekty hover na zdjęciach
   document.querySelectorAll('.column-item').forEach(item => {
     const img = item.querySelector('img');
     if (!img) return;
@@ -1305,27 +1646,26 @@
     });
   });
 
-
-
-  // Dynamiczny nagłówek
+  // Dynamiczny nagłówek - poprawiona wersja
   const options = document.querySelectorAll('.top-options a');
   const heading = document.getElementById('dynamic-heading');
 
   const texts = {
     'idea': {
-      heading: "Poznaj, jak <span class='highlight-underline'>architektura</span> łączy się z <span class='highlight-underline'>technologią</span> poprzez ekspresyjne kolumny redefiniujące sposób myślenia o betonie."
+      heading: "Zaprojektowaliśmy i wylaliśmy sześć betonowych <span class='highlight-underline'>kolumn</span>. Każda stanowi zalążek oddzielnego <span class='highlight-underline'>pawilonu</span> osadzonego w przestrzeni naszego kampusu."
     },
-    'forma': {
-      heading: "Formy parametryczne tworzone z <span class='highlight-underline'>logiką estetyczną</span> i <span class='highlight-underline'>świadomą przestrzenią</span>. Każda kolumna to dialog między strukturą a rzeźbą."
+      'forma': {
+      heading: "Kształty kolumn i pawilonów powstały w <span class='highlight-underline'>parametrycznym</span> procesie projektowym, uwzględniającym estetykę, formę i ograniczenia betonu."
     },
     'technologia': {
-      heading: "System wytwarzania łączący <span class='highlight-underline'>algorytmy Grasshoppera</span>, <span class='highlight-underline'>druk 3D szalunków</span> i <span class='highlight-underline'>odlewany beton</span> w pełnoskalowy eksperyment architektoniczny."
+      heading: "Użyliśmy <span class='highlight-underline'>Grasshoppera</span> do generowania geometrii, drukowaliśmy szalunki w 3D i odlewaliśmy beton bezpośrednio na miejscu."
     },
   };
 
   options.forEach(option => {
     option.addEventListener('click', (e) => {
-      e.preventDefault();
+      e.preventDefault(); // To jest kluczowa linijka, która zapobiega przeładowaniu strony
+
       options.forEach(o => o.classList.remove('active'));
       option.classList.add('active');
 
@@ -1341,6 +1681,34 @@
         heading.style.transform = 'translateY(0)';
       }, 300);
     });
+  });
+
+    </script>
+    <script>
+      window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.main-nav');
+      if (window.scrollY > 100) {
+      nav.classList.add('scrolled');
+      nav.style.mixBlendMode = 'normal';
+      nav.style.color = 'var(--black)';
+      nav.style.backgroundColor = 'rgba(255,255,255,0.9)';
+    } else {
+      nav.classList.remove('scrolled');
+      nav.style.mixBlendMode = 'difference';
+      nav.style.color = 'var(--white)';
+      nav.style.backgroundColor = 'transparent';
+    }
+    });
+</script>
+<script>
+  // Usuń animację ładowania po zakończeniu
+  window.addEventListener('DOMContentLoaded', () => {
+    const loadingAnimation = document.getElementById('loadingAnimation');
+
+    // Opcjonalnie: usuń element po zakończeniu animacji
+    setTimeout(() => {
+      loadingAnimation.remove();
+    }, 2500); // 2s animacja + 0.5s margines
   });
 </script>
 </body>
