@@ -1251,7 +1251,7 @@
 
     .authors-image {
       width: 100%;
-      height: auto;
+      height: 80%;
       border-radius: 8px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease;
@@ -1309,6 +1309,65 @@
           grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         }
       }
+      @media (max-width: 480px) {
+        .logo {
+          font-size: 1.2rem;
+          padding-left: 10px;
+        }
+
+        .white-logo,
+        .black-logo {
+          height: 36px;
+        }
+
+        .main-nav {
+          padding: 0.8rem 1rem;
+        }
+      }
+
+      @media (min-width: 1025px) {
+        .authors-container {
+          grid-template-columns: 1fr 1fr; /* zachowujemy siatkę */
+        }
+
+        .authors-image {
+          max-width: 85%;
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .authors-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .authors-content {
+          align-items: center;
+          text-align: center;
+          max-width: 95%;
+        }
+
+        .authors-image {
+          max-width: 90vw;
+          height: auto;
+          margin-top: 2rem;
+        }
+
+        .authors-title {
+          font-size: 2rem;
+        }
+
+        .authors-description {
+          font-size: 1.1rem;
+          line-height: 1.8;
+        }
+      }
+
 
 
   </style>
@@ -1360,7 +1419,7 @@
       <div class="authors-content">
         <h2 class="authors-title">>> Autorzy projektu</h2>
         <p class="authors-description">
-          Projekt // W Formie został zrealizowany przez studentów specjalności Architektura Informacyjna na Wydziale Architektury Politechniki Warszawskiej pod kierunkiem dr inż. arch. Marcina Strzały. Pracowaliśmy zespołowo nad stworzeniem sześciu autorskich kolumn, które stały się punktem wyjścia do rozmowy o architekturze, formie i przestrzeni. W trakcie projektu rozwijaliśmy umiejętności modelowania parametrycznego, pracy z drukiem 3D oraz prezentacji koncepcji w formie fizycznej i cyfrowej. Każda kolumna to efekt wspólnej pracy, testów, decyzji projektowych i eksperymentów z materiałem.
+          Projekt // W Formie został zrealizowany przez studentów specjalności Architektura Informacyjna na Wydziale Architektury Politechniki Warszawskiej pod kierunkiem dr inż. arch. Marcina Strzały. Pracowaliśmy zespołowo nad stworzeniem sześciu autorskich kolumn, które stały się punktem wyjścia do rozmowy o architekturze, formie i przestrzeni. Każda kolumna to efekt wspólnej pracy, testów, decyzji projektowych i eksperymentów z materiałem.
         </p>
 
       </div>
@@ -1467,12 +1526,12 @@
     }
   });
 
-  // Kliknięcie w tytuł "KOLUMNY" → przewinięcie do sekcji
+  // Kliknięcie w tytuł
   document.getElementById('scroll-to-columns')?.addEventListener('click', () => {
     const target = document.getElementById('columns');
     if (target) {
       window.scrollTo({
-        top: target.offsetTop - 80, // dopasuj, jeśli masz sticky nav
+        top: target.offsetTop - 80,
         behavior: 'smooth'
       });
     }
@@ -1537,7 +1596,7 @@
 
   options.forEach(option => {
     option.addEventListener('click', (e) => {
-      e.preventDefault(); // To jest kluczowa linijka, która zapobiega przeładowaniu strony
+      e.preventDefault(); //  zapobiega przeładowaniu strony
 
       options.forEach(o => o.classList.remove('active'));
       option.classList.add('active');

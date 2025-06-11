@@ -1137,6 +1137,20 @@
       .specialization-logo {
         height: 18px;
       }
+      .logo {
+        font-size: 1.2rem;
+        padding-left: 10px;
+      }
+
+      .white-logo,
+      .black-logo {
+        height: 36px;
+      }
+
+      .main-nav {
+        padding: 0.8rem 1rem;
+      }
+    }
     }
 
     @media (max-width: 900px) {
@@ -1237,6 +1251,40 @@
       background-blend-mode: overlay;
       color: white;
     }
+    @media (max-width: 768px) {
+      .detail-gallery {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .process-step {
+        align-items: flex-start;
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .detail-image {
+        width: 100%;
+        height: auto;
+      }
+
+      .process-item {
+        padding: 0 1rem;
+        text-align: left;
+      }
+
+      .process-item h3 {
+        font-size: 1.1rem;
+      }
+
+      .process-item p {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+    }
+
+
+
     /* Animacja ładowania */
     .loading-animation {
       position: fixed;
@@ -1277,6 +1325,8 @@
       from { transform: scale(1); }
       to { transform: scale(1.05); }
     }
+
+
 
   </style>
 </head>
@@ -1364,7 +1414,7 @@
               auto-rotate
               camera-controls
               field-of-view="25deg"
-              style="width: 100%; height: 800px;"
+              style="width: 100%; height: 500px;"
               exposure="0.6";>
       </model-viewer>
     </div>
@@ -1469,34 +1519,38 @@
     </div>
 
     <div class="detail-gallery">
-      <img src="images/main/proces-1.png" alt="Druk 3D prototypu" class="detail-image">
-      <img src="images/main/proces-2.png" alt="Wylewanie betonu" class="detail-image">
-      <img src="images/main/proces-3.jpg" alt="Zdejmowanie form" class="detail-image">
-      <img src="images/main/proces-4.png" alt="Testy pełnowymiarowe" class="detail-image">
+      <div class="process-step">
+        <img src="images/main/proces-1.png" alt="Druk 3D prototypu" class="detail-image">
+        <div class="process-item">
+          <h3 class="minecraft-font">1. Druk 3D prototypu</h3>
+          <p>Druk pierwszego prototypu kolumny przy użyciu domowej drukarki 3D. Testowanie skali oraz jakości wydruku i detalu.</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <img src="images/main/proces-2.png" alt="Wylewanie betonu" class="detail-image">
+        <div class="process-item">
+          <h3 class="minecraft-font">2. Wylewanie betonu</h3>
+          <p>Wypełnienie form PLA betonem i oczekiwanie na jego związanie. Testy twardnienia oraz wytrzymałości materiału.</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <img src="images/main/proces-3.jpg" alt="Usuwanie form" class="detail-image">
+        <div class="process-item">
+          <h3 class="minecraft-font">3. Usuwanie form</h3>
+          <p>Delikatne usuwanie plastikowych szalunków za pomocą opalarki. Ocena odporności betonu oraz jakości powierzchni.</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <img src="images/main/proces-4.png" alt="Próby pełnowymiarowe" class="detail-image">
+        <div class="process-item">
+          <h3 class="minecraft-font">4. Próby pełnowymiarowe</h3>
+          <p>Składanie i zalewanie większych form w warunkach zewnętrznych. Testowanie spoin, stabilności oraz procesu montażowego.</p>
+        </div>
+      </div>
     </div>
-
-    <div class="process-grid">
-      <div class="process-item">
-        <h3 class="minecraft-font">1.  Druk 3D prototypu</h3>
-        <p>Druk pierwszego prototypu kolumny przy użyciu domowej drukarki 3D. Testowanie skali oraz jakości wydruku i detalu.</p>
-      </div>
-
-      <div class="process-item">
-        <h3 class="minecraft-font">2.  Wylewanie betonu</h3>
-        <p>Wypełnienie form PLA betonem i oczekiwanie na jego związanie. Testy twardnienia oraz wytrzymałości materiału.</p>
-      </div>
-
-      <div class="process-item">
-        <h3 class="minecraft-font">3.  Usuwanie form</h3>
-        <p>Delikatne usuwanie plastikowych szalunków za pomocą opalarki. Ocena odporności betonu oraz jakości powierzchni.</p>
-      </div>
-
-      <div class="process-item">
-        <h3 class="minecraft-font">4.  Próby pełnowymiarowe</h3>
-        <p>Składanie i zalewanie większych form w warunkach zewnętrznych. Testowanie spoin, stabilności oraz procesu montażowego.</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 

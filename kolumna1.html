@@ -594,6 +594,18 @@
                 font-size: calc(1.8rem * var(--scale-factor));
             }
         }
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+                padding-left: 10px;
+            }
+
+
+
+            .main-nav {
+                padding: 0.8rem 1rem;
+            }
+        }
 
         /* Dodatkowe style dla elementów z indexu */
         .highlight-underline {
@@ -631,6 +643,78 @@
         h2.column-title.minecraft-font {
             color: var(--magenta);
         }
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+                padding-left: 10px;
+            }
+
+            .white-logo,
+            .black-logo {
+                height: 36px;
+            }
+
+            .main-nav {
+                padding: 0.8rem 1rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .model-section {
+                padding: 2rem 0 0 !important;
+                gap: 0rem !important;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: relative;
+            }
+
+            .model-container {
+                height: 55vh !important;
+                max-height: 500px;
+                width: 100%;
+                margin-bottom: -8rem;
+                z-index: 1;
+            }
+
+            model-viewer {
+                height: 100%;
+                max-height: 500px;
+                width: 100%;
+                margin-bottom: -3rem;
+            }
+
+            .column-info {
+                margin-top: -1.5rem;
+                z-index: 2;
+                position: relative;
+                text-align: center;
+            }
+            .column-title.minecraft-font,
+            .process-image-caption h3.minecraft-font,
+            .gallery-caption h3.minecraft-font {
+                font-size: calc(1.4rem * var(--scale-factor));
+                line-height: 1.2;
+            }
+            .split-section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .split-section .column-info {
+                align-items: center;
+                text-align: center;
+            }
+
+            .split-section .specs-grid {
+                justify-content: center;
+            }
+        }
+
+
+
+
     </style>
 </head>
 <body>
@@ -683,7 +767,7 @@
 
             <div class="column-info">
                 <div class="column-meta">KOLUMNA 01</div>
-                <h1 class="column-title minecraft-font">>> NAZWA W TRAKCIE</h1>
+                <h1 class="column-title minecraft-font">>> CALYX</h1>
                 <div class="spec-item">
                     <h4 class="minecraft-font">Anna Kaczkowska</h4>
                     <h4 class="minecraft-font">Natalia Nawrot</h4>
@@ -693,7 +777,7 @@
                     <p></p>
                 </div>
                 <p class="column-description">
-                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum pa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                    Projekt kolumny powstał jako próba połączenia lekkości formy ze strukturalną siłą. Inspiracją był kielich kwiatu – symbol symetrii, napięcia i delikatności. Stworzyłyśmy kolumne o maksymalnym przewężeniu przy zachowaniu jej stabilności. Powierzchnia kolumny została zaprojektowana jako wynik nałożenia dwóch przecinających się systemów skręconych krzywych.
                 </p>
 
                 <div class="specs-grid">
@@ -707,11 +791,11 @@
                     </div>
                     <div class="spec-item">
                         <h4 class="minecraft-font">Radius</h4>
-                        <p>14-22 cm</p>
+                        <p>33 cm</p>
                     </div>
                     <div class="spec-item">
                         <h4 class="minecraft-font">Volume</h4>
-                        <p>0.045 m^3 </p>
+                        <p>0.074 m^3 </p>
                     </div>
             </div>
         </div>
@@ -722,7 +806,7 @@
             <div class="column-info">
                 <h2 class="column-title minecraft-font">>> PARAMETRY</h2>
                 <p class="column-description">
-                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt i
+                    W procesie doboru parametrów skupiłyśmy się na wielkości wcięć obłych i ostrych oraz rozrzeźbieniu kolumny definiowanemu przez wprowadzone parametry. Uzyskana ilość parametrów pozwoliła na stworzenie zróżnicowanych wariantów.
                 </p>
             </div>
             <div class="square-image-container">
@@ -738,10 +822,10 @@
                 <img src="images/1/1_6.png" alt="Warianty parametryczne" class="large-image">
             </div>
             <div class="column-info">
-                <div class="column-meta">SYMETRYCZNE WCIĘCIE + WZMOCNIENIE</div>
+                <div class="column-meta">ANALIZA MOŻLIWYCH DO UZYSKANIA ZMIAN W STRUKTURZE</div>
                 <h2 class="column-title minecraft-font">>> WARIACJE KOLUMNY</h2>
                 <p class="column-description">
-                    Wariant kolumny z symetrycznymi wcięciami i wzmocnioną strukturą. Etap pośredni w rozwoju formy kolumny, pokazujący ewolucję projektu. Grafika obok prezentuje różne warianty parametryczne kolumny, które zostały przeanalizowane w procesie projektowym.
+                    W projekcie kluczową rolę odegrało określenie geometrii siatkowej powierzchni kolumny. Zmienne wartości parametrów pozwalały uzyskać struktury  o różnym stopniu transparentności czy rytmice wzoru. Po zestawieniu wariantów zdecydowałyśmy się na zestaw parametrów: 15, 1.25, 1.30, 60°.
                 </p>
                 <div class="specs-grid" style="margin-top: 2rem;">
                     <div class="spec-item">
@@ -750,7 +834,7 @@
                     </div>
                     <div class="spec-item">
                         <h4 class="minecraft-font">Optymalizacja</h4>
-                        <p>3 kryteria wyboru</p>
+                        <p>4 kryteria wyboru</p>
                     </div>
                 </div>
             </div>
@@ -765,22 +849,22 @@
             <div class="process-image">
                 <img src="images/1/1_3.png" alt="Proces – etap 1">
                 <div class="process-image-caption">
-                    <h3 class="minecraft-font">ETAP 1</h3>
-                    <p>Pokaz procesu generatywnego - pierwsza faza tworzenia formy kolumny.</p>
+                    <h3 class="minecraft-font">WYBÓR OPTYMALNYCH PARAMETRÓW DLA PRZEKROI</h3>
+                    <p>Połączenie ze sobą w przekroju falującej i ząbkowanej obręczy o zadanych parametrach.</p>
                 </div>
             </div>
             <div class="process-image">
                 <img src="images/1/1_4.png" alt="Proces – etap 2">
                 <div class="process-image-caption">
-                    <h3 class="minecraft-font">ETAP 2</h3>
-                    <p>Druga faza rozwoju struktury i kształtu kolumny.</p>
+                    <h3 class="minecraft-font">SCHEMAT POWSTAŁEGO WZORU </h3>
+                    <p>Powstały w wyniku połączenia wzór przed taliowaniem kolumny.</p>
                 </div>
             </div>
             <div class="process-image">
                 <img src="images/1/1_5.png" alt="Proces – etap 3">
                 <div class="process-image-caption">
-                    <h3 class="minecraft-font">ETAP 3</h3>
-                    <p>Finałowe dopracowanie detali i struktury kolumny.</p>
+                    <h3 class="minecraft-font">FINALNA KOLUMNA</h3>
+                    <p>Naniesienie wzoru powstałego z przecinających się skręconych krzywych na kolumne.</p>
                 </div>
             </div>
         </div>
@@ -796,7 +880,7 @@
                 <div>
                     <h2 class="column-title minecraft-font">>> DETAL WYBRANY</h2>
                     <p class="column-description">
-                        Finalna wersja kolumny prezentująca wszystkie charakterystyczne elementy projektu. Detal pokazuje precyzję wykonania i jakość materiałów użytych w projekcie.
+                        Pokrycie tworzy układ prętów wpisanych w siatkę sześciu powtarzalnych jednostek, projektowana jako całościowy system. Finalnie powstała ażurowa konstrukcja z bambusa, która pełni funkcję zadaszenia parkingu rowerowego przy budynku EITI Politechniki Warszawskiej.
                     </p>
                     <div class="specs-grid" style="margin-top: 2rem;">
                         <div class="spec-item">
@@ -804,8 +888,8 @@
                             <p>Druk 3D + odlew betonowy</p>
                         </div>
                         <div class="spec-item">
-                            <h4 class="minecraft-font">Powierzchnia</h4>
-                            <p>Strukturalna, fakturalna</p>
+                            <h4 class="minecraft-font">FORMA</h4>
+                            <p>strukturalna, ażurowa </p>
                         </div>
                     </div>
                 </div>
@@ -819,16 +903,16 @@
             <div class="column-info">
                 <h2 class="column-title minecraft-font">>> PAWILON</h2>
                 <p class="column-description">
-                    Model całego pawilonu pokazujący kolumny w kontekście architektonicznym. Prezentacja układu przestrzennego i relacji między elementami struktury. Pawilon został zaprojektowany jako system modułowy, gdzie każda kolumna pełni zarówno funkcję konstrukcyjną, jak i estetyczną.
+                    Struktura kielicha rozszerzająca się ku górze wynika bezpośrednio z siatki geometrycznej słupa i płynnie przechodzi w układ zadaszenia. Dzięki temu kolumny i dach funkcjonują jako jedna spójna struktura – wzajemnie się uzupełniając, a nie konkurując ze sobą.
                 </p>
                 <div class="specs-grid" style="margin-top: 2rem;">
                     <div class="spec-item">
                         <h4 class="minecraft-font">Liczba kolumn</h4>
-                        <p>12 elementów nośnych</p>
+                        <p>6 elementów nośnych </p>
                     </div>
                     <div class="spec-item">
                         <h4 class="minecraft-font">Konfiguracja</h4>
-                        <p>3 różne typy modułów</p>
+                        <p>2 różne typy modułów </p>
                     </div>
                 </div>
             </div>
@@ -859,21 +943,21 @@
                 <img src="images/1/1_7.png" alt="Pawilon – widok ogólny">
                 <div class="gallery-caption">
                     <h3 class="minecraft-font">WIDOK</h3>
-                    <p>Prezentacja pawilonu w pełnej skali z otoczeniem</p>
+                    <p>Rzut pawilonu widocznego z góry.</p>
                 </div>
             </div>
             <div class="process-image">
                 <img src="images/1/1_8.png" alt="Pawilon – detale konstrukcyjne">
                 <div class="gallery-caption">
-                    <h3 class="minecraft-font">DETALE KONSTRUKCYJNE</h3>
-                    <p>Połączenia między elementami i system nośny</p>
+                    <h3 class="minecraft-font">ELEWACJA</h3>
+                    <p>Widok boczny na zadaszenie.</p>
                 </div>
             </div>
             <div class="process-image">
                 <img src="images/1/1_wiz.jpeg" alt="Pawilon – detale konstrukcyjne">
                 <div class="gallery-caption">
-                    <h3 class="minecraft-font">DETALE KONSTRUKCYJNE</h3>
-                    <p>Połączenia między elementami i system nośny</p>
+                    <h3 class="minecraft-font">WIZUALIZACJA</h3>
+                    <p>Prezentacja funkcji pawilonu jako parking dla rowerów.</p>
                 </div>
             </div>
         </div>
