@@ -830,6 +830,9 @@
       border-bottom-color: var(--white);
       color: var(--white);
     }
+    .process-step img.detail-image {
+      margin-bottom: 1.5rem;
+    }
 
     .detail-back:hover {
       opacity: 0.6;
@@ -1258,14 +1261,21 @@
       }
 
       .process-step {
-        align-items: flex-start;
-        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-right: 2.5rem;
+        padding-right: 2.5rem;
+        box-sizing: border-box;
+        align-items: center;
+        text-align: center;
         width: 100%;
+        margin-bottom: 2rem;
       }
 
       .detail-image {
         width: 100%;
         height: auto;
+        margin-bottom: 1rem;
       }
 
       .process-item {
@@ -1282,6 +1292,25 @@
         line-height: 1.6;
       }
     }
+    @media (max-width: 768px) {
+      #columns .section-title.pawilony-title {
+        font-size: 0.8 rem !important;
+        line-height: 1 !important;
+        padding: 0 1rem !important;
+        margin-bottom: 1rem !important;
+      }
+
+      #columns .section-header {
+        padding: 0 1rem !important;
+      }
+
+      #columns p {
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
+        padding: 0 1rem !important;
+      }
+    }
+
 
 
 
@@ -1324,6 +1353,77 @@
     @keyframes pulse {
       from { transform: scale(1); }
       to { transform: scale(1.05); }
+    }
+
+    @media (max-width: 768px) {
+      #columns .section-header {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      #columns .section-title {
+        text-align: left !important;
+        font-size: 1.5rem !important;
+      }
+      .process-step {
+        align-items: left !important;
+        text-align: center;
+      }
+
+      .process-item {
+        padding: 0 1.5rem !important;
+        text-align: left !important;
+      }
+
+      .process-item h3::before {
+        display: none !important;
+      }
+    }
+    @media (max-width: 768px) {
+      #scroll-to-columns {
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #columns .section-header {
+        text-align: center !important;
+      }
+
+      #columns .section-title.pawilony-title {
+        text-align: center !important;
+        padding-left: 0rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .top-options {
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.5rem;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .top-options a {
+        font-size: 1rem;
+      }
+      .hero-title {
+        font-size: 1.8rem !important;
+        text-align: center;
+        padding: 0 1rem;
+        word-wrap: break-word;
+      }
+      .cover h1 {
+        font-size: 1.5rem !important;
+        padding: 0 1rem !important;
+        line-height: 1.4 !important;
+        text-align: center !important;
+        word-break: break-word !important;
+        max-width: 100% !important;
+      }
     }
 
 
@@ -1384,7 +1484,7 @@
   </div>
 
   <h1 id="dynamic-heading">
-    Zaprojektowaliśmy i wylaliśmy sześć betonowych <span class='highlight-underline'>kolumn</span>. Każda stanowi zalążek oddzielnego <span class='highlight-underline'>pawilonu</span> osadzonego w przestrzeni naszego kampusu.
+    Wydrukowaliśmy i wylaliśmy sześć betonowych <span class='highlight-underline'>kolumn</span>. Każda stanowi zalążek oddzielnego <span class='highlight-underline'>pawilonu</span> osadzonego w przestrzeni naszego kampusu.
   </h1>
 </section>
 
@@ -1436,7 +1536,7 @@
   <div class="map-footer-bar">
     <div class="container">
       <div class="map-footer-content">
-        <div class="map-bar-left">Gdzie stoją pawilony? <span>— Mapa sytuacyjna</span></div>
+        <div class="map-bar-left">Gdzie stoją pawilony? <span>— Mapa</span></div>
         <div class="map-bar-center">Od wspólnego procesu do sześciu lokalnych odpowiedzi na przestrzeń.</div>
       </div>
     </div>
@@ -1706,7 +1806,7 @@
 
   const texts = {
     'idea': {
-      heading: "Zaprojektowaliśmy i wylaliśmy sześć betonowych <span class='highlight-underline'>kolumn</span>. Każda stanowi zalążek oddzielnego <span class='highlight-underline'>pawilonu</span> osadzonego w przestrzeni naszego kampusu."
+      heading: "Wydrukowaliśmy i wylaliśmy sześć betonowych <span class='highlight-underline'>kolumn</span>. Każda stanowi zalążek oddzielnego <span class='highlight-underline'>pawilonu</span> osadzonego w przestrzeni naszego kampusu."
     },
       'forma': {
       heading: "Kształty kolumn i pawilonów powstały w <span class='highlight-underline'>parametrycznym</span> procesie projektowym, uwzględniającym estetykę, formę i ograniczenia betonu."
