@@ -706,6 +706,40 @@
       font-family: 'Lato', sans-serif;
     }
 
+    .dual-diagram-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      justify-items: center;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+
+    .diagram-block {
+      text-align: center;
+    }
+
+    .diagram-image {
+      max-width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+    }
+
+    .diagram-label {
+      font-size: calc(1.1rem * var(--scale-factor));
+      margin-top: 1rem;
+      line-height: 1.2;
+    }
+
+    @media (max-width: 768px) {
+      .dual-diagram-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+
   </style>
 </head>
 <body>
@@ -853,24 +887,21 @@
   <section class="container">
     <h2 class="column-title minecraft-font" style="text-align: center; margin-bottom: 1.5rem;">>> SCHEMATY POWSTAWANIA</h2>
     <p class="column-description" style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
-      Parametrami wejściowymi są funkcje matematyczne sinus i cosinus. Modyfikując długość fal można dostosować poprzez interferencję ich wzmocnienie lub osłabienie. Otrzymany efekt  ma opcję dodatkowej modulacji amplitudy. Otrzymana krzywa stanowi krawędź zewnętrzną kolumny.
+      Parametrami wejściowymi są funkcje matematyczne sinus i cosinus. Modyfikując długość fal można dostosować poprzez interferencję ich wzmocnienie lub osłabienie. Otrzymany efekt ma opcję dodatkowej modulacji amplitudy. Otrzymana krzywa stanowi krawędź zewnętrzną kolumny.
     </p>
 
-    <div class="gallery-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 1000px; margin: 0 auto;">
-      <div class="gallery-item">
-        <img src="images/2/2_9.png" alt="Galeria obraz 1">
-        <div class="gallery-caption">
-          <h3 class="minecraft-font">EWOLUCJA FORMY</h3>
-        </div>
+    <div class="dual-diagram-grid">
+      <div class="diagram-block">
+        <img src="images/2/2_9.png" alt="Galeria obraz 1" class="diagram-image">
+        <h3 class="minecraft-font diagram-label">EWOLUCJA FORMY</h3>
       </div>
-      <div class="gallery-item">
-        <img src="images/2/2_10.png" alt="Galeria obraz 2">
-        <div class="gallery-caption">
-          <h3 class="minecraft-font">MODELOWANIE PAWILONU</h3>
-        </div>
+      <div class="diagram-block">
+        <img src="images/2/2_10.png" alt="Galeria obraz 2" class="diagram-image">
+        <h3 class="minecraft-font diagram-label">MODELOWANIE PAWILONU</h3>
       </div>
     </div>
   </section>
+
 
 
   <!-- Sekcja materiałowa -->
