@@ -493,6 +493,41 @@
             color: var(--dark-gray);
         }
 
+        /* Sekcja procesu z dwoma obrazami */
+        .dual-diagram-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            justify-items: center;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .diagram-block {
+            text-align: center;
+        }
+
+        .diagram-image {
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: contain;
+        }
+
+        .diagram-label {
+            font-size: calc(1.1rem * var(--scale-factor));
+            margin-top: 1rem;
+            line-height: 1.2;
+            color: var(--dark-gray);
+        }
+
+        @media (max-width: 768px) {
+            .dual-diagram-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
         /* Nowy styl dla większego obrazka */
         .large-image {
             width: 100%;
@@ -833,8 +868,28 @@
     <!-- Sekcja procesu z trzema obrazami -->
     <section class="container">
         <h2 class="column-title minecraft-font" style="text-align: center; margin-bottom: 3rem;">>> PROCES TWÓRCZY</h2>
+        <div class="dual-diagram-grid">
+            <div class="diagram-block">
+                <img src="images/6/6_3.png" alt="Proces – etap 1" class="diagram-image">
+                <h3 class="minecraft-font diagram-label">Formowanie ksztaltu calej kolumny</h3>
+                <p>
+                    Polegało na wykonaniu kilku operacji na prostej tubie o średnicy 30cm i wysokości 200cm. Ostateczny kształt posiada masywną podstawę, smukły trzon i szeroką koronę.
+                    <br>Chociaż każdy element miał wyglądać inaczej istotne było znalezienie odpowiedniego sposobu łączenia kolejnych form wydrukowanych w drukarce 3d.
+                    <br>Segmenty ponumerowane są w kolejności od dołu do góry gotowej kolumny.
+                </p>
+            </div>
+            <div class="diagram-block">
+                <img src="images/6/6_4.png" alt="Proces – etap 2" class="diagram-image">
+                <h3 class="minecraft-font diagram-label">Ksztalt poszczegolnych segmentow</h3>
+                <p>
+                    Kształt poszczególnych segmentów
+                    <br>Chociaż każdy element miał wyglądać inaczej istotne było znalezienie odpowiedniego sposobu łączenia kolejnych form wydrukowanych w drukarce 3d.
+                    <br>Segmenty ponumerowane są w kolejności od dołu do góry gotowej kolumny.
+                </p>
+            </div>
+        </div>
 
-        <div class="process-gallery">
+<!--        <div class="process-gallery">
             <div class="process-image">
                 <img src="images/6/6_3.png" alt="Proces – etap 1">
                 <div class="process-image-caption">
@@ -857,7 +912,7 @@
                     </p>
                 </div>
             </div>
-<!--            <div class="process-image">
+            <div class="process-image">
                 <img src="images/1/1_5.png" alt="Proces – etap 3">
                 <div class="process-image-caption">
                     <h3 class="minecraft-font">ETAP 3</h3>
@@ -938,7 +993,7 @@
             <div class="process-image">
                 <img src="images/6/6_7.png" alt="Pawilon – rzut">
                 <div class="gallery-caption">
-                    <h3 class="minecraft-font">RZUT</h3>
+                    <h3 class="minecraft-font">WIDOK</h3>
                 </div>
             </div>
             <div class="process-image">
@@ -950,7 +1005,7 @@
             <div class="process-image">
                 <img src="images/6/6_wiz.png" alt="Pawilon – widok">
                 <div class="gallery-caption">
-                    <h3 class="minecraft-font">WIDOK</h3>
+                    <h3 class="minecraft-font">WIZUALIZACJA</h3>
                 </div>
             </div>
         </div>
