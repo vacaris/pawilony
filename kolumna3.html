@@ -291,7 +291,7 @@
     .model-container {
       width: 100%;
       height: 80vh;
-      min-height: 600px;
+      min-height: 1000px;
       position: relative;
     }
 
@@ -704,6 +704,20 @@
       color: var(--black);
       font-family: 'Lato', sans-serif;
     }
+    /* Tylko dla modelu pawilonu */
+    model-viewer.scaled-pavilion {
+      height: 100%;
+      max-height: 800px;
+      transform: scale(1.5) translateY(80px);
+      transform-origin: center top;
+    }
+
+    @media (max-width: 768px) {
+      model-viewer.scaled-pavilion {
+        transform: scale(1.1) translateY(0px);
+        max-height: 400px;
+      }
+    }
 
   </style>
 </head>
@@ -740,8 +754,25 @@
   <section class="container">
     <div class="model-section">
       <div class="model-container">
+        <style>
+          model-viewer.scaled-column {
+            width: 100%;
+            height: 800px;
+            transform: scale(1.8) translateY(100px);
+            transform-origin: center top;
+          }
+
+          @media (max-width: 1000px) {
+            model-viewer.scaled-column {
+              height: 400px;
+              transform: scale(1.1) translateY(20px);
+            }
+          }
+        </style>
+
         <model-viewer
-                src="models/kolumna-3.glb"
+                class="scaled-column"
+                src="models/kolumna-3.gltf"
                 ios-src="models/kolumna-3.usdz"
                 alt="Model kolumny betonowej"
                 ar
@@ -749,9 +780,8 @@
                 environment-image="neutral"
                 auto-rotate
                 camera-controls
-                field-of-view="25deg"
-                style="width: 100%; height: 600px;"
-                exposure="0.6";>
+                field-of-view="10deg"
+                exposure="0.6">
         </model-viewer>
       </div>
 
@@ -902,19 +932,37 @@
         </div>
       </div>
       <div class="model-container">
-        <model-viewer
-                src="models/pawilon-3.glb"
-                ios-src="models/pawilon-3.usdz"
-                alt="Model kolumny betonowej"
-                ar
-                ar-modes="scene-viewer quick-look webxr"
-                environment-image="neutral"
-                auto-rotate
-                camera-controls
-                field-of-view="25deg"
-                style="width: 100%; height: 600px;"
-                exposure="0.6";>
-        </model-viewer>
+        <style>
+          model-viewer.scaled-pavilion {
+            height: 100%;
+            max-height: 700px;
+            transform: scale(1.2) translateY(60px);
+            transform-origin: center top;
+          }
+
+          @media (max-width: 768px) {
+            model-viewer.scaled-pavilion {
+              transform: scale(1.05) translateY(0px);
+              max-height: 400px;
+            }
+          }
+        </style>
+
+        <div class="model-container">
+          <model-viewer
+                  class="scaled-pavilion"
+                  src="models/pawilon-3_2"
+                  ios-src="models/pawilon-3_2.usdz"
+                  alt="Model pawilonu"
+                  ar
+                  ar-modes="scene-viewer quick-look webxr"
+                  environment-image="neutral"
+                  auto-rotate
+                  camera-controls
+                  field-of-view="10deg"
+                  exposure="0.6">
+          </model-viewer>
+        </div>
       </div>
     </div>
   </section>
