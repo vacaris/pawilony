@@ -291,7 +291,7 @@
         .model-container {
             width: 100%;
             height: 80vh;
-            min-height: 600px;
+            min-height: 1000px;
             position: relative;
         }
 
@@ -740,19 +740,36 @@
     <section class="container">
         <div class="model-section">
             <div class="model-container">
+                <style>
+                    model-viewer.scaled-column {
+                        width: 100%;
+                        height: 800px;
+                        transform: scale(1.8) translateY(100px);
+                        transform-origin: center top;
+                    }
+
+                    @media (max-width: 768px) {
+                        model-viewer.scaled-column {
+                            height: 400px;
+                            transform: scale(1.1) translateY(20px);
+                        }
+                    }
+                </style>
+
                 <model-viewer
-                        src="models/kolumna-5.glb"
-                        ios-src="models/kolumna-5.usdz"
+                        class="scaled-column"
+                        src="models/kolumna-5_2.gltf"
+                        ios-src="models/kolumna-5_2.usdz"
                         alt="Model kolumny betonowej"
                         ar
                         ar-modes="scene-viewer quick-look webxr"
                         environment-image="neutral"
                         auto-rotate
                         camera-controls
-                        field-of-view="25deg"
-                        style="width: 100%; height: 600px;"
-                        exposure="0.6";>
+                        field-of-view="10deg"
+                        exposure="0.6">
                 </model-viewer>
+
             </div>
 
             <div class="column-info">
@@ -836,7 +853,7 @@
 
         <div class="process-gallery">
             <div class="process-image">
-                <img src="images/5/5_3" alt="Proces – etap 1.1">
+                <img src="images/5/5_3.png" alt="Proces – etap 1.1">
                 <div class="process-image-caption">
                     <h3 class="minecraft-font">ETAP 1.1</h3>
                     <p>Utworzenie kolumny uporządkowanej na podstawie 12-ścianu – faza tworzenia części skrajnych.</p>
@@ -906,21 +923,39 @@
                 </div>
             </div>
             <div class="model-container">
-                <model-viewer
-                        src="models/pawilon-5.glb"
-                        ios-src="models/pawilon-5.usdz"
-                        alt="Model kolumny betonowej"
-                        ar
-                        ar-modes="scene-viewer quick-look webxr"
-                        environment-image="neutral"
-                        auto-rotate
-                        camera-controls
-                        field-of-view="25deg"
-                        style="width: 100%; height: 600px;"
-                        exposure="0.6";>
-                </model-viewer>
+                <style>
+                    model-viewer.scaled-pavilion {
+                        width: 100%;
+                        height: 800px;
+                        transform: scale(1.8) translateY(100px);
+                        transform-origin: center top;
+                    }
+
+                    @media (max-width: 768px) {
+                        model-viewer.scaled-pavilion {
+                            height: 400px;
+                            transform: scale(1.2) translateY(0px);
+                        }
+                    }
+                </style>
+
+                <div class="model-container">
+                    <model-viewer
+                            class="scaled-pavilion"
+                            src="models/pawilon-5_2.gltf"
+                            ios-src="models/pawilon-5_2.usdz"
+                            alt="Model pawilonu"
+                            ar
+                            ar-modes="scene-viewer quick-look webxr"
+                            environment-image="neutral"
+                            auto-rotate
+                            camera-controls
+                            field-of-view="10deg"
+                            exposure="0.6">
+                    </model-viewer>
+                </div>
+
             </div>
-        </div>
     </section>
 
     <!-- Galeria wizualizacji pawilonu -->
