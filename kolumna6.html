@@ -290,18 +290,27 @@
 
         .model-container {
             width: 100%;
-            height: 80vh;
-            min-height: 600px;
+            height: auto;
             position: relative;
             place-self: start;
             transform: translateY(-40px);
         }
+
 
         model-viewer {
             --poster-color: transparent;
             width: 100%;
             height: 100%;
             background-color: transparent;
+        }
+
+        /* Sekcja z modelem pawilonu*/
+        .model-section-2 {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            padding: 4rem 0;
         }
 
         /* Tekst obok modelu */
@@ -741,6 +750,72 @@
             font-family: 'Lato', sans-serif;
         }
 
+        /* Styl ogólny dla dwóch kolumn */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin: 6rem 0;
+        }
+
+        /* Na telefonie – jedna pod drugą */
+        @media (max-width: 768px) {
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .double-columns-centered {
+            display: flex;
+            justify-content: center;
+            gap: 6rem;
+            margin: 6rem auto;
+            flex-wrap: wrap;
+        }
+
+        .column-block {
+            max-width: 500px;
+            text-align: left;
+        }
+
+
+        .column-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-top: 1rem;
+        }
+
+        .specs-grid {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .spec-item p {
+            margin: 0;
+        }
+
+        /* Telefon – jedna kolumna pod drugą */
+        @media (max-width: 768px) {
+            .double-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .column-block {
+                text-align: center;
+                padding: 0 1rem;
+            }
+
+            .specs-grid {
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -843,45 +918,26 @@
         </div>
     </section>
 
-    <section class="container">
-        <div class="variant-section">
-            <div class="column-info">
-                <h2 class="column-title minecraft-font">>> PARAMETRY</h2>
-                <p class="column-description">
-                    Szukając kształtów kolejnych segmentów kolumny staraliśmy się zróżnicować skręt kolumny, ilość ,,patyków’’, ich głębokość i kształt. Drugim parametrem wszystko pozostałe jest niemal przypadkowym efektem wielu obliczeń komputerowych, które operowały na sugerowanych wartościach.
-                </p>
-            </div>
-<!--            <div class="square-image-container">
-                <img src="images/1/1_2.png" alt="Warianty parametryczne" class="large-image">
-            </div> -->
+    <section class="container double-columns-centered">
+        <div class="column-block">
+            <h2 class="column-title minecraft-font">>> PARAMETRY</h2>
+            <p class="column-description">
+                Szukając kształtów kolejnych segmentów kolumny staraliśmy się zróżnicować skręt kolumny, ilość „patyków”, ich głębokość i kształt. Drugim parametrem wszystko pozostałe jest niemal przypadkowym efektem wielu obliczeń komputerowych, które operowały na sugerowanych wartościach.
+            </p>
         </div>
-    </section>
 
-
-    <section class="container">
-        <div class="variant-section">
-<!--            <div class="square-image-container">
-                <img src="images/1/1_6.png" alt="Warianty parametryczne" class="large-image">
-            </div> -->
-            <div class="column-info">
-<!--                <div class="column-meta">SYMETRYCZNE WCIĘCIE + WZMOCNIENIE</div> -->
-                <h2 class="column-title minecraft-font">>> WARIACJE KOLUMNY</h2>
-                <p class="column-description">
-                    Każdy kolejny segment kolumny odkręca się w miejscu łączenia tak, żeby służki sprawiały wrażenie wijących się ku górze – czasem się rozdwajają a czasem łączą.
-                </p>
-                <div class="specs-grid" style="margin-top: 2rem;">
-                    <div class="spec-item">
-<!--                        <h4 class="minecraft-font">Liczba wariantów</h4> -->
-                        <p>3 segmenty prawoskrętne</p>
-                    </div>
-                    <div class="spec-item">
-<!--                        <h4 class="minecraft-font">Optymalizacja</h4> -->
-                        <p>3 segmenty lewoskrętne</p>
-                    </div>
-                </div>
+        <div class="column-block">
+            <h2 class="column-title minecraft-font">>> WARIACJE KOLUMNY</h2>
+            <p class="column-description">
+                Każdy kolejny segment kolumny odkręca się w miejscu łączenia tak, żeby służki sprawiały wrażenie wijących się ku górze – czasem się rozdwajają a czasem łączą.
+            </p>
+            <div class="specs-grid">
+                <div class="spec-item"><p>3 segmenty prawoskrętne</p></div>
+                <div class="spec-item"><p>3 segmenty lewoskrętne</p></div>
             </div>
         </div>
     </section>
+
 
     <!-- Sekcja procesu z dwoma obrazami -->
     <section class="container">
@@ -921,16 +977,6 @@
                     <p class="column-description">
                         Aby formy do siebie pasowały wymagane było wyprostowanie skrętu, następnie odpowiednio zaprojektowane połączenie dwóch różnych kształtów. Wysokość tego stanu przejściowego dyktowany był przez złożoność obu kształtów. Dopiero wtedy - na koniec - rozpoczyna się kręcić w drugą stronę kształt kolejnej kolumny.
                     </p>
-<!--                    <div class="specs-grid" style="margin-top: 2rem;">
-                        <div class="spec-item">
-                            <h4 class="minecraft-font">Technologia</h4>
-                            <p>Druk 3D + odlew betonowy</p>
-                        </div>
-                        <div class="spec-item">
-                            <h4 class="minecraft-font">Powierzchnia</h4>
-                            <p>Strukturalna, fakturalna</p>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -938,13 +984,13 @@
 
     <!-- Sekcja z modelem pawilonu -->
     <section class="container">
-        <div class="model-section">
+        <div class="model-section-2">
             <div class="column-info">
                 <h2 class="column-title minecraft-font">>> PAWILON</h2>
                 <p class="column-description">
                     Pawilon składa się z 4 takich samych kolumn ustawionych w narożnikach prostokątnej konstrukcji dachu. Konstrukcja szkieletowa z drewna jest lekka ale sztywna i przenosi obciążenia materiałowego. Bryty rozpięte są na szynach, po których mogą być przesuwane tak, żeby można było dowolnie zwiększać i zmniejszać zacienienie pawilonu. Projektowany jest na środku Placu Politechniki, gdzie cień nie padł już od dziesiątek lat.
                 </p>
-<!--                <div class="specs-grid" style="margin-top: 2rem;">
+                 <div class="specs-grid" style="margin-top: 2rem;">
                     <div class="spec-item">
                         <h4 class="minecraft-font">Liczba kolumn</h4>
                         <p>12 elementów nośnych</p>
@@ -953,7 +999,7 @@
                         <h4 class="minecraft-font">Konfiguracja</h4>
                         <p>3 różne typy modułów</p>
                     </div>
-                </div> -->
+                </div>
             </div>
             <div class="model-container">
                 <model-viewer
