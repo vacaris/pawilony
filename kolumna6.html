@@ -283,7 +283,7 @@
             display: grid;
             grid-template-columns: 1.5fr 1fr;
             gap: 4rem;
-            align-items: center;
+            align-items: start;
             min-height: 90vh;
             padding: 4rem 0;
         }
@@ -293,6 +293,8 @@
             height: 80vh;
             min-height: 600px;
             position: relative;
+            place-self: start;
+            transform: translateY(-40px);
         }
 
         model-viewer {
@@ -775,8 +777,25 @@
     <section class="container">
         <div class="model-section">
             <div class="model-container">
+                <style>
+                    model-viewer.scaled-column {
+                        width: 100%;
+                        height: 800px;
+                        transform: scale(1.8) translateY(100px);
+                        transform-origin: center top;
+                    }
+
+                    @media (max-width: 768px) {
+                        model-viewer.scaled-column {
+                            height: 400px;
+                            transform: scale(1.1) translateY(20px);
+                        }
+                    }
+                </style>
+
                 <model-viewer
-                        src="models/kolumna-6.glb"
+                        class="scaled-column"
+                        src="models/kolumna-6.gltf"
                         ios-src="models/kolumna-6.usdz"
                         alt="Model kolumny betonowej"
                         ar
@@ -784,9 +803,8 @@
                         environment-image="neutral"
                         auto-rotate
                         camera-controls
-                        field-of-view="25deg"
-                        style="width: 100%; height: 600px;"
-                        exposure="0.6";>
+                        field-of-view="10deg"
+                        exposure="0.6">
                 </model-viewer>
             </div>
 
@@ -939,7 +957,7 @@
             </div>
             <div class="model-container">
                 <model-viewer
-                        src="models/pawilon-6.glb"
+                        src="models/pawilon-6.gltf"
                         ios-src="models/pawilon-6.usdz"
                         alt="Model kolumny betonowej"
                         ar
